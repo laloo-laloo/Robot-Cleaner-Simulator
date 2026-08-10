@@ -16,20 +16,22 @@ public class TrashObject : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             PlayerCleanManager playerClean = other.GetComponent<PlayerCleanManager>();
+            Player player = other.GetComponent<Player>();
             if (playerClean != null)
             {
                 PlayerCleanManager.CleaningMode currentMode = playerClean.Mode;
-                ProcessSuckUp(currentMode);
+                ProcessSuckUp(currentMode, player);
             }
         }
     }
 
-    private void ProcessSuckUp(PlayerCleanManager.CleaningMode mode)
+    private void ProcessSuckUp(PlayerCleanManager.CleaningMode mode, Player player)
     {
         if(mode == PlayerCleanManager.CleaningMode.Sweeping && _trashType == TrashType.Dust)
         {
             Debug.Log("¾µ±â");
             GameManager.Instance.AddCleanProgress();
+            player.AddDust();
             Destroy(gameObject);
         }
         else if(mode == PlayerCleanManager.CleaningMode.Wiping && _trashType == TrashType.Liquid)
