@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6cfdad61a43e56249800a15eaf11e6a1
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 342428
+  packageName: Robotic Vacuum Cleaner Set
+  packageVersion: 1.0.0
+  assetPath: Assets/CoolWorks_Studio/Robotic_Vacuum_Cleaner_Set/Materials/Robotic_Vacuum_Cleaner_Blue.mat
+  uploadId: 816258

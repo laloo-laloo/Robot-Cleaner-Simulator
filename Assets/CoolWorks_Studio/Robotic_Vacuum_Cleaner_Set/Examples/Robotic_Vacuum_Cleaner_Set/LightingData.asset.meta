@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e4662ede4c7c9e54281ac876caf27611
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 112000000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 342428
+  packageName: Robotic Vacuum Cleaner Set
+  packageVersion: 1.0.0
+  assetPath: Assets/CoolWorks_Studio/Robotic_Vacuum_Cleaner_Set/Examples/Robotic_Vacuum_Cleaner_Set/LightingData.asset
+  uploadId: 816258

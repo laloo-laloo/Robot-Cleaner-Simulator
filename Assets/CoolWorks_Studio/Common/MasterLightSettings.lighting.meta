@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f28bc359627c60e428ad6b48c9e95cdf
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 4890085278179872738
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 342428
+  packageName: Robotic Vacuum Cleaner Set
+  packageVersion: 1.0.0
+  assetPath: Assets/CoolWorks_Studio/Common/MasterLightSettings.lighting
+  uploadId: 816258

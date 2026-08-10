@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 455db15448f5bf0489a11648d001ac26
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 342428
+  packageName: Robotic Vacuum Cleaner Set
+  packageVersion: 1.0.0
+  assetPath: Assets/CoolWorks_Studio/Common/Materials/Floor_Tiled_02.mat
+  uploadId: 816258
