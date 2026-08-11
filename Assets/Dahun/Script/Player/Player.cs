@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     private float _dustVolume, _batteryVolume;
     private float _dustMaxVolume, _batteryMaxVolume;
     private PlayerController _playerController;
+    private PlayerStats _playerStats;
 
 
     [SerializeField] private Slider _dustSlider, _batterySlider;
@@ -15,6 +16,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        _playerStats = GetComponent<PlayerStats >();
         _playerController = GetComponent<PlayerController>();
     }
 
@@ -29,12 +31,12 @@ public class Player : MonoBehaviour
     void Update()
     {
         CunsumeBattery();
+        _dustMaxVolume = _playerStats.DustMaxVolume;
+        _batteryMaxVolume = _playerStats.BatteryMaxVolume;
     }
 
     private void Initialize()
     {
-        _dustMaxVolume = 100;
-        _batteryMaxVolume = 100;
         _dustVolume = 0;
         _batteryVolume = _batteryMaxVolume;
         _dustSlider.value = _dustVolume;

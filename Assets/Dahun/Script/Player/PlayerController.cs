@@ -6,13 +6,22 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private bool _isMoving;
     [SerializeField] private bool _isBlockedByWall = false;
+
+    private PlayerStats _playerStats;
+
     public bool IsSetDirection;
 
-    [SerializeField] private float _moveSpeed = 1f;
+    private float _moveSpeed;
 
     private Rigidbody _rigidbody;
 
     public float MouseSensitivity = 0.1f;
+
+
+    private void Awake()
+    {
+        _playerStats = GetComponent<PlayerStats>();
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -27,6 +36,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         RotatePlayer();
+        _moveSpeed = _playerStats.MoveSpeed;
         if (Keyboard.current.wKey.isPressed)
         {
             if (!_isBlockedByWall)

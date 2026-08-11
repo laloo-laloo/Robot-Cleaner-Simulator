@@ -39,9 +39,6 @@ public class PlayerCleanManager : MonoBehaviour
             Debug.Log("청소모드 전환");
             ToggleCleaningMode();
         }
-
-        // if (먼지 흡입시)
-            //AddDustProgress();
     }
 
     private void ToggleCleaningMode()
@@ -54,12 +51,6 @@ public class PlayerCleanManager : MonoBehaviour
         {
             Mode = CleaningMode.Sweeping;
         }
-    }
-
-    private void AddDustProgress()
-    {
-        _player.AddDust();
-        //_cleanProgress.value = 초기 오염량 - (현재 오염량 / 초기 오염량)
     }
 
     private void CheckReturnCondition()

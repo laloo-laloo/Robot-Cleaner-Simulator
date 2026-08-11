@@ -31,6 +31,8 @@ public class BaseStation : MonoBehaviour
             player.PlayerMoveStop();
 
             player.transform.position = transform.position;
+
+            //업그레이드 ui 띄우기
         }
         if (other.gameObject.CompareTag("Trash"))
         {
