@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BaseStation : MonoBehaviour
 {
-
+    [SerializeField] private UpgradeUI _upgradeUI;
 
 
 
@@ -32,7 +32,7 @@ public class BaseStation : MonoBehaviour
 
             player.transform.position = transform.position;
 
-            //업그레이드 ui 띄우기
+            _upgradeUI.OpenUpgradeUI();
         }
         if (other.gameObject.CompareTag("Trash"))
         {

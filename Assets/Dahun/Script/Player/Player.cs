@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
     private void Initialize()
     {
         _dustVolume = 0;
-        _batteryVolume = _batteryMaxVolume;
+        _batteryVolume = 100;
         _dustSlider.value = _dustVolume;
         _batterySlider.value = _batteryVolume;
     }
@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
 
     private void CunsumeBattery()
     {
-        _batteryVolume = Mathf.MoveTowards(_batteryVolume, 0f, 0.2f * Time.deltaTime);
+        _batteryVolume = Mathf.MoveTowards(_batteryVolume, 0f, 0.5f * Time.deltaTime);
         _batterySlider.value = _batteryVolume;
     }
 
