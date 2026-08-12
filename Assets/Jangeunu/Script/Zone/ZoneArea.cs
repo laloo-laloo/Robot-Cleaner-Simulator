@@ -4,59 +4,68 @@ public class ZoneArea : MonoBehaviour
 {
     public enum ZoneType
     {
-        LivingRoom,
-        Kitchen,
-        MainRoom
+        LivingRoom,  // 거실
+        Kitchen,     // 주방
+        MainRoom     // 방
     }
+
+    [Header("Zone Settings")]
     [SerializeField] private ZoneType _zoneType;
-
     [SerializeField] private BoxCollider _zoneCollider;
-    [SerializeField] private GameObject _zoneCleaningRatePanel;
 
-    [SerializeField] private int _trashCountInZone = 0;
-
-    public int TotalTrashCount => _trashCountInZone;
+    // 외부에서 읽을 수 있도록 열어두는 프로퍼티
+    public ZoneType CurrentZoneType => _zoneType;
+    public int TotalTrashCount { get; private set; }
     public int CurrentTrashCount { get; private set; }
 
-    void Start()
+    private void Start()
     {
+        // 1. 콜라이더 자동 할당
         if (_zoneCollider == null)
-        {
             _zoneCollider = GetComponent<BoxCollider>();
-        }
 
+        // 2. OverlapBox로 내 영역 안에 있는 쓰레기 스캔
         Vector3 zoneCenter = transform.TransformPoint(_zoneCollider.center);
         Vector3 zoneHalfExtents = Vector3.Scale(_zoneCollider.size, transform.lossyScale) * 0.5f;
         Quaternion zoneRotation = transform.rotation;
 
         Collider[] zoneHitColliders = Physics.OverlapBox(zoneCenter, zoneHalfExtents, zoneRotation);
 
+        int count = 0;
         foreach (Collider col in zoneHitColliders)
         {
             if (col.GetComponent<TrashObject>() != null)
             {
-                _trashCountInZone++;
+                count++;
             }
         }
 
-        CurrentTrashCount = _trashCountInZone;
+        TotalTrashCount = count;
+        CurrentTrashCount = count;
 
-        ZoneManager.Instance.ReGisterZone(_zoneType, this);
+        // 3. ZoneManager에 자기 자신 등록
+        if (ZoneManager.Instance != null)
+        {
+            ZoneManager.Instance.RegisterZone(_zoneType, this);
+        }
     }
 
+    // 쓰레기가 하나 치워졌을 때 호출되는 함수
+    public void CleanOneTrash()
+    {
+        if (CurrentTrashCount > 0)
+        {
+            CurrentTrashCount--;
+        }
+    }
+
+    // 플레이어가 진입했을 때
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            _zoneCleaningRatePanel.SetActive(true);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            _zoneCleaningRatePanel.SetActive(false);
+            // ZoneManager에게 내가 속한 방으로 UI를 전환해 달라고 요청
+            ZoneManager.Instance.OnPlayerEnterZone(_zoneType);
         }
     }
 }

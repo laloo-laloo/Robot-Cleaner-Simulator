@@ -36,8 +36,13 @@ public class BaseStation : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Trash"))
         {
-            GameManager.Instance.AddCleanProgress();
-            Destroy(other.gameObject);
+            TrashObject trash = other.GetComponent<TrashObject>();
+
+            if (trash != null)
+            {
+                // 2. 해당 인스턴스의 CleaningTrash() 호출 (내부에서 GameManager 신호 전달 및 Destroy 처리됨)
+                trash.CleaningTrash();
+            }
         }
     }
 }

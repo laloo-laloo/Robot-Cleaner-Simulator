@@ -8,12 +8,30 @@ public class TrashObject : MonoBehaviour
         Liquid,
         Big
     }
-    [SerializeField]
-    private TrashType _trashType = TrashType.Dust;
+
+    [SerializeField] private TrashType _trashType = TrashType.Dust;
+
+    // 이 쓰레기가 속한 구역 (Start 시 자동 스캔)
+    [SerializeField] private ZoneArea.ZoneType _zoneType;
+
+    private void Start()
+    {
+        // 쓰레기 위치를 감지해 현재 자기가 속한 ZoneArea의 ZoneType을 자동으로 가져옵니다.
+        Collider[] hits = Physics.OverlapSphere(transform.position, 0.5f);
+        foreach (Collider hit in hits)
+        {
+            ZoneArea zone = hit.GetComponent<ZoneArea>();
+            if (zone != null)
+            {
+                _zoneType = zone.CurrentZoneType;
+                break;
+            }
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             PlayerCleanManager playerClean = other.GetComponent<PlayerCleanManager>();
             Player player = other.GetComponent<Player>();
@@ -27,24 +45,27 @@ public class TrashObject : MonoBehaviour
 
     private void ProcessSuckUp(PlayerCleanManager.CleaningMode mode, Player player)
     {
-        if(mode == PlayerCleanManager.CleaningMode.Sweeping && _trashType == TrashType.Dust)
+        if (mode == PlayerCleanManager.CleaningMode.Sweeping && _trashType == TrashType.Dust)
         {
             Debug.Log("쓸기");
-            GameManager.Instance.AddCleanProgress();
+            // 구역 타입을 인자로 전달합니다!
+            GameManager.Instance.AddCleanProgress(_zoneType);
             player.AddDust();
             Destroy(gameObject);
         }
-        else if(mode == PlayerCleanManager.CleaningMode.Wiping && _trashType == TrashType.Liquid)
+        else if (mode == PlayerCleanManager.CleaningMode.Wiping && _trashType == TrashType.Liquid)
         {
             Debug.Log("닦기");
-            GameManager.Instance.AddCleanProgress();
+            // 구역 타입을 인자로 전달합니다!
+            GameManager.Instance.AddCleanProgress(_zoneType);
             Destroy(gameObject);
         }
     }
 
-    public bool CleaningTrash() //BaseStation 호출용
+    public bool CleaningTrash() // BaseStation 호출용
     {
-        GameManager.Instance.AddCleanProgress();
+        // 구역 타입을 인자로 전달합니다!
+        GameManager.Instance.AddCleanProgress(_zoneType);
         Destroy(gameObject);
         return true;
     }

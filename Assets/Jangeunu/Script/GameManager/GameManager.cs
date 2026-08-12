@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 
@@ -8,32 +7,40 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     private float _currentTime;
 
+    [Header("Trash Info")]
     [SerializeField] private int _totalTrashCount;
     [SerializeField] private int _destoryTrashCount;
 
+    [Header("UI References")]
     [SerializeField] private GameObject _clearPanel;
     [SerializeField] private TextMeshProUGUI _clearTimeResultText;
-
     [SerializeField] private TextMeshProUGUI _timerText;
-    
-    [SerializeField] private Slider _cleaningRateSlider;
-    [SerializeField] private TextMeshProUGUI _cleaningRateText;
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Start()
     {
-        _clearPanel.SetActive(false);
+        if (_clearPanel != null)
+            _clearPanel.SetActive(false);
+
+        // 클리어 판단을 위해 전체 쓰레기 수 카운트는 유지
         TrashObject[] allTrashes = FindObjectsByType<TrashObject>(FindObjectsSortMode.None);
         _totalTrashCount = allTrashes.Length;
     }
 
-    void Update()
+    private void Update()
     {
-        if (_destoryTrashCount >= _totalTrashCount)
+        if (_destoryTrashCount >= _totalTrashCount && _totalTrashCount > 0)
         {
             GameClear();
         }
@@ -43,23 +50,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void UpdateTimer()
+    private void UpdateTimer()
     {
         _currentTime += Time.deltaTime;
         int minutes = (int)(_currentTime / 60);
         int seconds = (int)(_currentTime % 60);
-        string timeString = minutes.ToString("D2") + ":" + seconds.ToString("D2");
-        _timerText.text = timeString;
+        _timerText.text = $"{minutes:D2}:{seconds:D2}";
     }
 
-    public void AddCleanProgress()
+    public void AddCleanProgress(ZoneArea.ZoneType zoneType)
     {
         if (_totalTrashCount > _destoryTrashCount)
         {
-            _destoryTrashCount++;
-            float progressPercent = ((float)_destoryTrashCount / _totalTrashCount) * 100f;
-            _cleaningRateText.text = "청소율 - " + progressPercent.ToString("F0") + "%";
-            _cleaningRateSlider.value = (float)_destoryTrashCount / _totalTrashCount;
+            _destoryTrashCount++; // 전체 파괴 카운트 증가 (클리어 조건용)
+
+            // 구역 관리자에게만 UI 갱신 요청!
+            if (ZoneManager.Instance != null)
+            {
+                ZoneManager.Instance.OnTrashCleaned(zoneType);
+            }
         }
     }
 
