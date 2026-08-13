@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
 
     public float DustVolume => _dustVolume;
     public float BatteryVolume => _batteryVolume;
+    public float DustMaxVolume => _dustMaxVolume;
+    public float BatteryMaxVolume => _batteryMaxVolume;
 
 
     [SerializeField] private Slider _dustSlider, _batterySlider;
