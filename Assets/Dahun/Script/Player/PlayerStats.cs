@@ -27,7 +27,10 @@ public class PlayerStats : MonoBehaviour
     public float BatteryMaxVolume => _batteryMaxVolume;
     public float MoveSpeed => _moveSpeed;
     public float Gold => _gold;
-    public float AddGold => _gold++;
+    public void AddGold(float amount)
+    {
+        _gold += amount;
+    }
     public int GetStatLevel(StatType type) => statLevel[(int)type] + 1;
     public float GetUpgradeCost(StatType type)
     {

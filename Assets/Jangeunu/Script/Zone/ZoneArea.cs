@@ -6,7 +6,8 @@ public class ZoneArea : MonoBehaviour
     {
         LivingRoom,  // 芭角
         Kitchen,     // 林规
-        MainRoom     // 规
+        MasterRoom,     // 救规
+        DrawingRoom,    // 览立角
     }
 
     [Header("Zone Settings")]

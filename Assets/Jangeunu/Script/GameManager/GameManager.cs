@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _clearTimeResultText;
     [SerializeField] private TextMeshProUGUI _timerText;
 
+    [SerializeField] private PlayerStats _playerStats;
+
     private void Awake()
     {
         if (Instance == null)
@@ -64,6 +66,7 @@ public class GameManager : MonoBehaviour
         {
             _destoryTrashCount++; // 전체 파괴 카운트 증가 (클리어 조건용)
 
+            _playerStats.AddGold(1);
             // 구역 관리자에게만 UI 갱신 요청!
             if (ZoneManager.Instance != null)
             {

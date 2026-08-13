@@ -109,7 +109,8 @@ public class ZoneManager : MonoBehaviour
         {
             case ZoneArea.ZoneType.LivingRoom: return "芭角 没家啦";
             case ZoneArea.ZoneType.Kitchen: return "林规 没家啦";
-            case ZoneArea.ZoneType.MainRoom: return "救规 没家啦";
+            case ZoneArea.ZoneType.MasterRoom: return "救规 没家啦";
+            case ZoneArea.ZoneType.DrawingRoom: return "览立角 没家啦";
             default: return "备开";
         }
     }

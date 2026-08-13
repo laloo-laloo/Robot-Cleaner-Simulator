@@ -7,7 +7,7 @@ public class TrashSpawner : MonoBehaviour
 
     private void OnEnable()
     {
-        int randomCount = Random.Range(10, 19);
+        int randomCount = Random.Range(20, 39);
         for (int i = 0; i < randomCount; i++)
         {
             TrashSpawn();

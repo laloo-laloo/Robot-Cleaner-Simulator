@@ -21,6 +21,11 @@ public class UpgradeUI : MonoBehaviour
         
     }
 
+    private void OnEnable()
+    {
+        UpdateUI();
+    }
+
     public void UpdateUI()
     {
         _moveStatLevel = PlayerStats.GetStatLevel(PlayerStats.StatType.MoveSpeed);
