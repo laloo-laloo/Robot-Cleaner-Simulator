@@ -47,11 +47,18 @@ public class TrashObject : MonoBehaviour
     {
         if (mode == PlayerCleanManager.CleaningMode.Sweeping && _trashType == TrashType.Dust)
         {
-            Debug.Log("쓸기");
-            // 구역 타입을 인자로 전달합니다!
-            GameManager.Instance.AddCleanProgress(_zoneType);
-            player.AddDust();
-            Destroy(gameObject);
+            if (player.DustVolume < player.DustMaxVolume)
+            {
+                Debug.Log("쓸기");
+                // 구역 타입을 인자로 전달합니다!
+                GameManager.Instance.AddCleanProgress(_zoneType);
+                player.AddDust();
+                Destroy(gameObject);
+            }
+            else
+            {
+                Debug.Log("먼지통 용량 부족");
+            }
         }
         else if (mode == PlayerCleanManager.CleaningMode.Wiping && _trashType == TrashType.Liquid)
         {
