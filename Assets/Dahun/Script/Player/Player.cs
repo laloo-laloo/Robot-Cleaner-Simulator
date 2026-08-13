@@ -10,6 +10,9 @@ public class Player : MonoBehaviour
     private PlayerController _playerController;
     private PlayerStats _playerStats;
 
+    public float DustVolume => _dustVolume;
+    public float BatteryVolume => _batteryVolume;
+
 
     [SerializeField] private Slider _dustSlider, _batterySlider;
 
@@ -84,15 +87,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    public float CheckDustValue()
-    {
-        return _dustSlider.value;
-    }
-
-    public float CheckBatteryValue()
-    {
-        return _batterySlider.value;
-    }
+    public float CheckDustValue() => _dustSlider.value;
+    public float CheckBatteryValue() => _batterySlider.value;
+    
 
     public void PlayerMoveStop()
     {

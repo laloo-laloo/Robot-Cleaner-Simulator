@@ -35,7 +35,7 @@ public class PlayerStats : MonoBehaviour
     public float GetUpgradeCost(StatType type)
     {
         int level = statLevel[(int)type];
-        if (level >= Cost.GetLength(1)) return -1; // 최대 레벨이면 -1 등으로 표시
+        if (level >= Cost.GetLength(1)) return -1;
         return Cost[(int)type, level];
     }
 
