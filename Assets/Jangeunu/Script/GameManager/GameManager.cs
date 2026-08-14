@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Keyboard.current.qKey.isPressed)
+        if (Keyboard.current.pKey.isPressed)
         {
             OnClickTitle();
         }
