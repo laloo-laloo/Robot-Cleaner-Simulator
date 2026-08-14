@@ -36,27 +36,27 @@ public class UpgradeUI : MonoBehaviour
         float moveCost = PlayerStats.GetUpgradeCost(PlayerStats.StatType.MoveSpeed);
         _moveStatLVText.text = "LV." + _moveStatLevel;
         if (moveCost == -1)
-            _moveStatLVText.text = "Max";
+            _moveStatCostText.text = "Max";
         else
             _moveStatCostText.text = moveCost + "$";
 
         float rangeCost = PlayerStats.GetUpgradeCost(PlayerStats.StatType.Range);
         _rangeStatLVText.text = "LV." + _rangeStatLevel;
-        if (moveCost == -1)
+        if (rangeCost == -1)
             _rangeStatCostText.text = "Max";
         else
             _rangeStatCostText.text = rangeCost + "$";
 
         float batteryCost = PlayerStats.GetUpgradeCost(PlayerStats.StatType.Battery);
         _batteryStatLVText.text = "LV." + _batteryStatLevel;
-        if (moveCost == -1)
+        if (batteryCost == -1)
             _batteryStatCostText.text = "Max";
         else
             _batteryStatCostText.text = batteryCost + "$";
 
         float dustBinCost = PlayerStats.GetUpgradeCost(PlayerStats.StatType.DustBin);
         _dustBinStatLVText.text = "LV." + _dustBinStatLevel;
-        if (moveCost == -1)
+        if (dustBinCost == -1)
             _dustBinStatCostText.text = "Max";
         else
             _dustBinStatCostText.text = dustBinCost + "$";
