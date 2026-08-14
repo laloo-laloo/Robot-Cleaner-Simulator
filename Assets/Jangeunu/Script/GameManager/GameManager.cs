@@ -1,5 +1,6 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -42,6 +43,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (Keyboard.current.qKey.isPressed)
+        {
+            OnClickTitle();
+        }
+
         if (_destoryTrashCount >= _totalTrashCount && _totalTrashCount > 0)
         {
             GameClear();
