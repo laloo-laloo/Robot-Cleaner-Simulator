@@ -8,7 +8,7 @@ public class PlayerCleanManager : MonoBehaviour
 
     public enum CleaningMode
     {
-        Sweeping, Wiping
+        Sweeping, Wiping, None
     }
     public CleaningMode Mode;
 
@@ -58,10 +58,12 @@ public class PlayerCleanManager : MonoBehaviour
         if (_player.CheckBatteryValue() <= 10f || _player.CheckDustValue() >= 99.9f)
         {
             _warning.gameObject.SetActive(true);
+            Mode = CleaningMode.None;
         }
         else
         {
             _warning.gameObject.SetActive(false);
+            Mode = CleaningMode.Sweeping;
         }
     }
 }
