@@ -8,13 +8,13 @@ public class PlayerCleanManager : MonoBehaviour
 
     public enum CleaningMode
     {
-        Sweeping, Wiping, None
+        Sweeping, Wiping
     }
     public CleaningMode Mode;
 
     private Player _player;
 
-    [SerializeField] private Image _warning;
+    [SerializeField] private Image _warning, _SweepingImage, _WipingImage;
 
 
     private void Awake()
@@ -45,10 +45,14 @@ public class PlayerCleanManager : MonoBehaviour
     {
         if (Mode == CleaningMode.Sweeping)
         {
+            _WipingImage.gameObject.SetActive(true);
+            _SweepingImage.gameObject.SetActive(false);
             Mode = CleaningMode.Wiping;
         }
         else
         {
+            _WipingImage.gameObject.SetActive(false);
+            _SweepingImage.gameObject.SetActive(true);
             Mode = CleaningMode.Sweeping;
         }
     }
@@ -58,12 +62,14 @@ public class PlayerCleanManager : MonoBehaviour
         if (_player.CheckBatteryValue() <= 10f || _player.CheckDustValue() >= 99.9f)
         {
             _warning.gameObject.SetActive(true);
-            Mode = CleaningMode.None;
+            if (_player.CheckBatteryValue() <= 0f)
+            {
+
+            }
         }
         else
         {
             _warning.gameObject.SetActive(false);
-            Mode = CleaningMode.Sweeping;
         }
     }
 }
