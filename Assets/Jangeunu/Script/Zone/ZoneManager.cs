@@ -111,7 +111,9 @@ public class ZoneManager : MonoBehaviour
             case ZoneArea.ZoneType.Kitchen: return "林规 没家啦";
             case ZoneArea.ZoneType.MasterRoom: return "救规 没家啦";
             case ZoneArea.ZoneType.DrawingRoom: return "览立角 没家啦";
-            case ZoneArea.ZoneType.hallway1: return "汗档1 没家啦";
+            case ZoneArea.ZoneType.Hallway1: return "汗档1 没家啦";
+            case ZoneArea.ZoneType.Hallway2: return "汗档2 没家啦";
+            case ZoneArea.ZoneType.SpareRoom: return "累篮规 没家啦";
             default: return "备开";
         }
     }
