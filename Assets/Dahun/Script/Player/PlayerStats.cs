@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -54,6 +55,7 @@ public class PlayerStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CunsumeBattery();
         if (Keyboard.current.eKey.isPressed)
         {
             _gold += 100;
@@ -68,6 +70,11 @@ public class PlayerStats : MonoBehaviour
         _batteryVolume = _batteryMaxVolume;
         _moveSpeed = 2f;
         _capsuleCollider.radius = 0.7f;
+    }
+
+    public void AddDust()
+    {
+        _dustVolume += 1;
     }
 
     public void Upgrade(StatType type, float amount)
@@ -109,5 +116,35 @@ public class PlayerStats : MonoBehaviour
     public void DustBinUp()
     {
         Upgrade(StatType.DustBin, 25f);
+    }
+
+    public void EmptyingDust()
+    {
+        StartCoroutine(DecreaseDust());
+    }
+    public void RechargeBattery()
+    {
+        StartCoroutine(Recharging());
+    }
+
+    private IEnumerator DecreaseDust()
+    {
+        while (_dustVolume > 0)
+        {
+            _dustVolume = Mathf.MoveTowards(_dustVolume, 0f, 50 * Time.deltaTime);
+            yield return null;
+        }
+    }
+    private IEnumerator Recharging()
+    {
+        while (_batteryVolume < 99.9f)
+        {
+            _batteryVolume = Mathf.MoveTowards(_batteryVolume, 100f, 50f * Time.deltaTime);
+            yield return null;
+        }
+    }
+    private void CunsumeBattery()
+    {
+        _batteryVolume = Mathf.MoveTowards(_batteryVolume, 0f, 0.5f * Time.deltaTime);
     }
 }

@@ -34,7 +34,7 @@ public class TrashObject : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             PlayerCleanManager playerClean = other.GetComponent<PlayerCleanManager>();
-            Player player = other.GetComponent<Player>();
+            PlayerStats player = other.GetComponent<PlayerStats>();
             if (playerClean != null)
             {
                 PlayerCleanManager.CleaningMode currentMode = playerClean.Mode;
@@ -43,7 +43,7 @@ public class TrashObject : MonoBehaviour
         }
     }
 
-    private void ProcessSuckUp(PlayerCleanManager.CleaningMode mode, Player player)
+    private void ProcessSuckUp(PlayerCleanManager.CleaningMode mode, PlayerStats player)
     {
         if (mode == PlayerCleanManager.CleaningMode.Sweeping && _trashType == TrashType.Dust)
         {

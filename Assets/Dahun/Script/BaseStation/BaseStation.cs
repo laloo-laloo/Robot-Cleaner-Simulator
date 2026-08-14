@@ -26,8 +26,8 @@ public class BaseStation : MonoBehaviour
             print("플레이어 충돌 감지");
             Player player =  other.gameObject.GetComponentInParent<Player>();
 
-            player.RechargeBattery();
-            player.EmptyingDust();
+            player._playerStats.RechargeBattery();
+            player._playerStats.EmptyingDust();
             player.PlayerMoveStop();
 
             player.transform.position = transform.position;
