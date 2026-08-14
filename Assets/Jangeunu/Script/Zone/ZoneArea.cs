@@ -8,7 +8,9 @@ public class ZoneArea : MonoBehaviour
         Kitchen,     // 주방
         MasterRoom,     // 안방
         DrawingRoom,    // 응접실
-        hallway1,   // 복도1
+        Hallway1,   // 복도1
+        Hallway2,   // 복도2
+        SpareRoom,  // 작은방
 
     }
 
