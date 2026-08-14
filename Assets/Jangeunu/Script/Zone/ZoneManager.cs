@@ -96,7 +96,7 @@ public class ZoneManager : MonoBehaviour
             _zoneNameText.text = GetKoreanZoneName(zoneType);
 
         if (_zoneProgressText != null)
-            _zoneProgressText.text = $"{progress:F0}%";
+            _zoneProgressText.text = $"{progress:F1}%";
 
         if (_zoneProgressSlider != null)
             _zoneProgressSlider.value = progress / 100f;
@@ -111,6 +111,7 @@ public class ZoneManager : MonoBehaviour
             case ZoneArea.ZoneType.Kitchen: return "林规 没家啦";
             case ZoneArea.ZoneType.MasterRoom: return "救规 没家啦";
             case ZoneArea.ZoneType.DrawingRoom: return "览立角 没家啦";
+            case ZoneArea.ZoneType.hallway1: return "汗档1 没家啦";
             default: return "备开";
         }
     }

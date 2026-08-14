@@ -8,6 +8,8 @@ public class ZoneArea : MonoBehaviour
         Kitchen,     // 주방
         MasterRoom,     // 안방
         DrawingRoom,    // 응접실
+        hallway1,   // 복도1
+
     }
 
     [Header("Zone Settings")]
@@ -22,22 +24,25 @@ public class ZoneArea : MonoBehaviour
     private void Start()
     {
         // 1. 콜라이더 자동 할당
-        if (_zoneCollider == null)
-            _zoneCollider = GetComponent<BoxCollider>();
-
-        // 2. OverlapBox로 내 영역 안에 있는 쓰레기 스캔
-        Vector3 zoneCenter = transform.TransformPoint(_zoneCollider.center);
-        Vector3 zoneHalfExtents = Vector3.Scale(_zoneCollider.size, transform.lossyScale) * 0.5f;
-        Quaternion zoneRotation = transform.rotation;
-
-        Collider[] zoneHitColliders = Physics.OverlapBox(zoneCenter, zoneHalfExtents, zoneRotation);
+        BoxCollider[] zoneColliders = GetComponents<BoxCollider>();
 
         int count = 0;
-        foreach (Collider col in zoneHitColliders)
+
+        // 2. OverlapBox로 내 영역 안에 있는 쓰레기 스캔
+        foreach (BoxCollider col in zoneColliders)
         {
-            if (col.GetComponent<TrashObject>() != null)
+            Vector3 zoneCenter = transform.TransformPoint(_zoneCollider.center);
+            Vector3 zoneHalfExtents = Vector3.Scale(_zoneCollider.size, transform.lossyScale) * 0.5f;
+            Quaternion zoneRotation = transform.rotation;
+
+            Collider[] zoneHitColliders = Physics.OverlapBox(zoneCenter, zoneHalfExtents, zoneRotation);
+
+            foreach (Collider hit in zoneHitColliders)
             {
-                count++;
+                if (hit.GetComponent<TrashObject>() != null)
+                {
+                    count++;
+                }
             }
         }
 
