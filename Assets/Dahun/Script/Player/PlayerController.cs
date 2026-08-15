@@ -6,7 +6,10 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private bool _isMoving;
     [SerializeField] private bool _isBlockedByWall = false;
-
+    [SerializeField] private CameraMovement _cameraMovement;
+    [SerializeField] private float _rotationSyncSpeed = 20f;
+    private bool _isSyncingRotation;
+    private float _targetYaw;
     private PlayerStats _playerStats;
 
     public bool IsSetDirection;
@@ -50,6 +53,11 @@ public class PlayerController : MonoBehaviour
                 PlayerMoveStop();
             }
         }
+
+        if (IsSetDirection)
+            _rigidbody.constraints |= RigidbodyConstraints.FreezeRotationY;
+        else
+            _rigidbody.constraints &= ~RigidbodyConstraints.FreezeRotationY;
     }
 
     private void FixedUpdate()
@@ -62,19 +70,17 @@ public class PlayerController : MonoBehaviour
 
     private void RotatePlayer()
     {
-        if (!IsSetDirection)
+        Vector2 mouseDelta = Mouse.current.delta.ReadValue();
+        if (mouseDelta.x != 0)
         {
-            Vector2 mouseDelta = Mouse.current.delta.ReadValue();
-
-            // 회전 입력(마우스 움직임)이 발생하면 벽 막힘 상태 해제! 
-            // (벽에서 마우스를 돌려 다른 곳을 바라봤을 때 즉시 탈출 가능하게 하기 위함)
-            if (mouseDelta.x != 0)
-            {
-                _isBlockedByWall = false;
-            }
-
-            transform.Rotate(Vector3.up * mouseDelta.x * MouseSensitivity, Space.World);
+            _isBlockedByWall = false;
         }
+
+        if (IsSetDirection) return;
+
+        float targetYaw = _cameraMovement.FreeYaw;
+        float newYaw = Mathf.LerpAngle(transform.eulerAngles.y, targetYaw, _rotationSyncSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Euler(0f, newYaw, 0f);
     }
 
     private void SetDirection()
@@ -108,10 +114,8 @@ public class PlayerController : MonoBehaviour
         _isMoving = false;
         IsSetDirection = false;
         _isBlockedByWall = true;
-
         if (_rigidbody != null)
         {
-            // 남아있는 선형/회전 속도 강제 0으로 초기화
             _rigidbody.linearVelocity = Vector3.zero;
             _rigidbody.angularVelocity = Vector3.zero;
         }
