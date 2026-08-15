@@ -6855,7 +6855,8 @@ MonoBehaviour:
   _collisionMask:
     serializedVersion: 2
     m_Bits: 64
-  _collisionBuffer: 0.2
+  _wallAlpha: 0.25
+  _cameraRadius: 0.2
 --- !u!4 &917435853
 Transform:
   m_ObjectHideFlags: 0
@@ -12283,6 +12284,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCleanManager
   Mode: 0
   _warning: {fileID: 163531598}
+  _SweepingImage: {fileID: 0}
+  _WipingImage: {fileID: 0}
 --- !u!114 &1836455431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12297,6 +12300,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   _isMoving: 0
   _isBlockedByWall: 0
+  _cameraMovement: {fileID: 0}
+  _rotationSyncSpeed: 20
   IsSetDirection: 0
   MouseSensitivity: 0.1
 --- !u!114 &1836455432
@@ -12311,7 +12316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 099076c81cb84ee4187a6fb30615fbbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  _playerStats: {fileID: 0}
+  _playerStats: {fileID: 1836455434}
   _dustSlider: {fileID: 496720238}
   _batterySlider: {fileID: 1137322364}
 --- !u!136 &1836455433
