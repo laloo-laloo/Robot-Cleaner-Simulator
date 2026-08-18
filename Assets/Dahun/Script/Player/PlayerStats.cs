@@ -14,6 +14,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private UpgradeUI _upgradeUI;
     [SerializeField] private ParticleSystem _moveSpeedFlashEffect, _rangeFlashEffect, _batteryFlashEffect, _dustBinFlashEffect;
 
+    [SerializeField] private GameObject _moveSpeedMaxObject, _rangeMaxObject, _batteryMaxObject, _dustBinMaxObject;
+
     private CapsuleCollider _capsuleCollider;
     private int[] statLevel = new int[4];
     //속도, 범위, 배터리, 용량
@@ -54,7 +56,10 @@ public class PlayerStats : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        _moveSpeedMaxObject.SetActive(false);
+        _rangeMaxObject.SetActive(false);
+        _batteryMaxObject.SetActive(false);
+        _dustBinMaxObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -85,6 +90,7 @@ public class PlayerStats : MonoBehaviour
 
     public void Upgrade(StatType type, float amount)
     {
+        SoundManager.Instance.PlaySFX(SoundManager.SFX.Upgrade);
         int index = (int)type;
         int level = statLevel[index];
 
@@ -107,6 +113,8 @@ public class PlayerStats : MonoBehaviour
         _upgradeUI.UpdateUI();
         _upgradeUI.UpgradeAmountText(type);
         PlayUpgradeFlash(type);
+
+        CheckMaxLevel(type);
     }
 
     private void PlayUpgradeFlash(StatType type)
@@ -149,6 +157,7 @@ public class PlayerStats : MonoBehaviour
     }
     public void RechargeBattery()
     {
+        SoundManager.Instance.PlaySFX(SoundManager.SFX.RechargingBattery);
         StartCoroutine(Recharging());
     }
 
@@ -176,5 +185,19 @@ public class PlayerStats : MonoBehaviour
             _currentSpeed = _moveSpeed;
 
         _batteryVolume = Mathf.MoveTowards(_batteryVolume, 0f, 0.5f * Time.deltaTime);
+    }
+
+    private void CheckMaxLevel(StatType type)
+    {
+        int index = (int)type;
+        bool isMax = statLevel[index] >= Cost.GetLength(1);
+
+        switch (type)
+        {
+            case StatType.MoveSpeed: _moveSpeedMaxObject.SetActive(isMax); break;
+            case StatType.Range: _rangeMaxObject.SetActive(isMax); break;
+            case StatType.Battery: _batteryMaxObject.SetActive(isMax); break;
+            case StatType.DustBin: _dustBinMaxObject.SetActive(isMax); break;
+        }
     }
 }

@@ -51,6 +51,7 @@ public class TrashObject : MonoBehaviour
             {
                 Debug.Log("쓸기");
                 // 구역 타입을 인자로 전달합니다!
+                SoundManager.Instance.PlaySFX(SoundManager.SFX.SuckDust);
                 GameManager.Instance.AddCleanProgress(_zoneType);
                 player.AddDust();
                 Destroy(gameObject);
@@ -64,6 +65,7 @@ public class TrashObject : MonoBehaviour
         {
             Debug.Log("닦기");
             // 구역 타입을 인자로 전달합니다!
+            SoundManager.Instance.PlaySFX(SoundManager.SFX.WipeLipuid);
             GameManager.Instance.AddCleanProgress(_zoneType);
             Destroy(gameObject);
         }

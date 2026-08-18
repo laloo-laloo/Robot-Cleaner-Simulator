@@ -17,21 +17,25 @@ public class TitleUIManager : MonoBehaviour
 
     public void OnClickStart()
     {
-        SceneManager.LoadScene("Test");
+        SoundManager.Instance.PlaySFX(SoundManager.SFX.UIClick);
+        SceneManager.LoadScene("Test 1");
     }
 
     public void OnClickOpenRank()
     {
+        SoundManager.Instance.PlaySFX(SoundManager.SFX.UIClick);
         _rankPanel.SetActive(true);
     }
 
     public void OnClickCloseRank()
     {
+        SoundManager.Instance.PlaySFX(SoundManager.SFX.UIClick);
         _rankPanel.SetActive(false);
     }
 
     public void OnClickExit()
     {
+        SoundManager.Instance.PlaySFX(SoundManager.SFX.UIClick);
         Application.Quit();
     }
 }

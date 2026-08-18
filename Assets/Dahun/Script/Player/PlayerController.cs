@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        
         _playerStats = GetComponent<PlayerStats>();
     }
 
@@ -51,6 +52,8 @@ public class PlayerController : MonoBehaviour
                 PlayerMoveStop();
             }
         }
+
+        
 
         if (IsSetDirection)
             _rigidbody.constraints |= RigidbodyConstraints.FreezeRotationY;
@@ -83,6 +86,7 @@ public class PlayerController : MonoBehaviour
 
     private void SetDirection()
     {
+        SoundManager.Instance.PlayMoveSound();
         IsSetDirection = true;
     }
 
@@ -103,6 +107,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
+            SoundManager.Instance.PlaySFX(SoundManager.SFX.BumpWall);
             PlayerMoveStop();
         }
     }
@@ -112,6 +117,7 @@ public class PlayerController : MonoBehaviour
         _isMoving = false;
         IsSetDirection = false;
         _isBlockedByWall = true;
+        SoundManager.Instance.StopMoveSound();
         if (_rigidbody != null)
         {
             _rigidbody.linearVelocity = Vector3.zero;
