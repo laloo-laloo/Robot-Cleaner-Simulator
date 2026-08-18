@@ -4,10 +4,27 @@ using UnityEngine;
 public class UpgradeUI : MonoBehaviour
 {
     public PlayerStats PlayerStats;
-    private int _moveStatLevel, _rangeStatLevel, _batteryStatLevel, _dustBinStatLevel;
 
-    [SerializeField] private TMP_Text _moveStatCostText, _rangeStatCostText, _batteryStatCostText, _dustBinStatCostText, _currentGoldText;
-    [SerializeField] private TMP_Text _moveStatLVText, _rangeStatLVText, _batteryStatLVText, _dustBinStatLVText;
+    [SerializeField] private TMP_Text _moveSpeedStatCostText, _rangeStatCostText, _batteryStatCostText, _dustBinStatCostText, _currentGoldText;
+    [SerializeField] private TMP_Text _moveSpeedStatLVText, _rangeStatLVText, _batteryStatLVText, _dustBinStatLVText;
+    [SerializeField] private TMP_Text _moveSpeedAmountText, _rangeAmountText, _batteryAmountText, _dustBinAmountText;
+
+    private static readonly PlayerStats.StatType[] _statTypes =
+    {
+        PlayerStats.StatType.MoveSpeed,
+        PlayerStats.StatType.Range,
+        PlayerStats.StatType.Battery,
+        PlayerStats.StatType.DustBin
+    };
+
+    private TMP_Text[] _lvTexts;
+    private TMP_Text[] _costTexts;
+
+    private void Awake()
+    {
+        _lvTexts = new[] { _moveSpeedStatLVText, _rangeStatLVText, _batteryStatLVText, _dustBinStatLVText };
+        _costTexts = new[] { _moveSpeedStatCostText, _rangeStatCostText, _batteryStatCostText, _dustBinStatCostText };
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,40 +45,38 @@ public class UpgradeUI : MonoBehaviour
 
     public void UpdateUI()
     {
-        _moveStatLevel = PlayerStats.GetStatLevel(PlayerStats.StatType.MoveSpeed);
-        _rangeStatLevel = PlayerStats.GetStatLevel(PlayerStats.StatType.Range);
-        _batteryStatLevel = PlayerStats.GetStatLevel(PlayerStats.StatType.Battery);
-        _dustBinStatLevel = PlayerStats.GetStatLevel(PlayerStats.StatType.DustBin);
+        for (int i = 0; i < _statTypes.Length; i++)
+        {
+            PlayerStats.StatType type = _statTypes[i];
+            int level = PlayerStats.GetStatLevel(type);
+            float cost = PlayerStats.GetUpgradeCost(type);
 
-        float moveCost = PlayerStats.GetUpgradeCost(PlayerStats.StatType.MoveSpeed);
-        _moveStatLVText.text = "LV." + _moveStatLevel;
-        if (moveCost == -1)
-            _moveStatCostText.text = "Max";
-        else
-            _moveStatCostText.text = moveCost + "$";
+            _lvTexts[i].text = "LV." + level;
+            _costTexts[i].text = cost == -1 ? "Max" : cost + "$";
 
-        float rangeCost = PlayerStats.GetUpgradeCost(PlayerStats.StatType.Range);
-        _rangeStatLVText.text = "LV." + _rangeStatLevel;
-        if (rangeCost == -1)
-            _rangeStatCostText.text = "Max";
-        else
-            _rangeStatCostText.text = rangeCost + "$";
-
-        float batteryCost = PlayerStats.GetUpgradeCost(PlayerStats.StatType.Battery);
-        _batteryStatLVText.text = "LV." + _batteryStatLevel;
-        if (batteryCost == -1)
-            _batteryStatCostText.text = "Max";
-        else
-            _batteryStatCostText.text = batteryCost + "$";
-
-        float dustBinCost = PlayerStats.GetUpgradeCost(PlayerStats.StatType.DustBin);
-        _dustBinStatLVText.text = "LV." + _dustBinStatLevel;
-        if (dustBinCost == -1)
-            _dustBinStatCostText.text = "Max";
-        else
-            _dustBinStatCostText.text = dustBinCost + "$";
+            UpgradeAmountText(type);
+        }
 
         _currentGoldText.text = PlayerStats.Gold + "$";
+    }
+
+    public void UpgradeAmountText(PlayerStats.StatType type)
+    {
+        switch (type)
+        {
+            case PlayerStats.StatType.Battery:
+                _batteryAmountText.text = $"{PlayerStats.BatteryMaxVolume} -> {PlayerStats.BatteryMaxVolume + 25f}";
+                break;
+            case PlayerStats.StatType.DustBin:
+                _dustBinAmountText.text = $"{PlayerStats.DustMaxVolume} -> {PlayerStats.DustMaxVolume + 25f}";
+                break;
+            case PlayerStats.StatType.MoveSpeed:
+                _moveSpeedAmountText.text = $"{PlayerStats.MoveSpeed} -> {PlayerStats.MoveSpeed + 1f}";
+                break;
+            case PlayerStats.StatType.Range:
+                _rangeAmountText.text = $"{PlayerStats.Range} -> {PlayerStats.Range + 0.2f}";
+                break;
+        }
     }
 
     public void OpenUpgradeUI()

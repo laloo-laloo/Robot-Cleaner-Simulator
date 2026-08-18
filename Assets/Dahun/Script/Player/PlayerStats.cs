@@ -12,6 +12,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float _currentSpeed;
 
     [SerializeField] private UpgradeUI _upgradeUI;
+    [SerializeField] private ParticleSystem _moveSpeedFlashEffect, _rangeFlashEffect, _batteryFlashEffect, _dustBinFlashEffect;
 
     private CapsuleCollider _capsuleCollider;
     private int[] statLevel = new int[4];
@@ -29,6 +30,7 @@ public class PlayerStats : MonoBehaviour
     public float BatteryVolume => _batteryVolume;
     public float BatteryMaxVolume => _batteryMaxVolume;
     public float MoveSpeed => _moveSpeed;
+    public float Range => _capsuleCollider.radius;
     public float CurrentSpeed => _currentSpeed;
     public float Gold => _gold;
     public void AddGold(float amount)
@@ -99,10 +101,29 @@ public class PlayerStats : MonoBehaviour
         {
             case StatType.MoveSpeed: _moveSpeed += amount; break;
             case StatType.Range: _capsuleCollider.radius += amount; break;
-            case StatType.Battery: _batteryVolume += amount; break;
+            case StatType.Battery: _batteryMaxVolume += amount; break;
             case StatType.DustBin: _dustMaxVolume += amount; break;
         }
         _upgradeUI.UpdateUI();
+        _upgradeUI.UpgradeAmountText(type);
+        PlayUpgradeFlash(type);
+    }
+
+    private void PlayUpgradeFlash(StatType type)
+    {
+        ParticleSystem effect = type switch
+        {
+            StatType.MoveSpeed => _moveSpeedFlashEffect,
+            StatType.Range => _rangeFlashEffect,
+            StatType.Battery => _batteryFlashEffect,
+            StatType.DustBin => _dustBinFlashEffect,
+            _ => null
+        };
+
+        if (effect == null) return;
+
+        effect.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        effect.Play();
     }
 
     public void MoveSpeedUp()
@@ -141,9 +162,9 @@ public class PlayerStats : MonoBehaviour
     }
     private IEnumerator Recharging()
     {
-        while (_batteryVolume < 99.9f)
+        while (_batteryVolume < (_batteryMaxVolume - 0.1f))
         {
-            _batteryVolume = Mathf.MoveTowards(_batteryVolume, 100f, 50f * Time.deltaTime);
+            _batteryVolume = Mathf.MoveTowards(_batteryVolume, _batteryMaxVolume, 50f * Time.deltaTime);
             yield return null;
         }
     }
