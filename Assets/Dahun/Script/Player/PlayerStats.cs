@@ -9,11 +9,13 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float _dustMaxVolume = 100, _batteryMaxVolume = 100;
     [SerializeField] private float _moveSpeed = 2;
     [SerializeField] private float _gold = 0;
+    [SerializeField] private float _currentSpeed;
 
     [SerializeField] private UpgradeUI _upgradeUI;
 
     private CapsuleCollider _capsuleCollider;
     private int[] statLevel = new int[4];
+    //속도, 범위, 배터리, 용량
     public float[,] Cost = { { 10, 20, 30, 40 },
                                 { 10, 20, 30, 40 },
                                 { 10, 20, 30, 40 },
@@ -27,6 +29,7 @@ public class PlayerStats : MonoBehaviour
     public float BatteryVolume => _batteryVolume;
     public float BatteryMaxVolume => _batteryMaxVolume;
     public float MoveSpeed => _moveSpeed;
+    public float CurrentSpeed => _currentSpeed;
     public float Gold => _gold;
     public void AddGold(float amount)
     {
@@ -69,6 +72,7 @@ public class PlayerStats : MonoBehaviour
         _dustVolume = 0;
         _batteryVolume = _batteryMaxVolume;
         _moveSpeed = 2f;
+        _currentSpeed = _moveSpeed;
         _capsuleCollider.radius = 0.7f;
     }
 
@@ -145,6 +149,11 @@ public class PlayerStats : MonoBehaviour
     }
     private void CunsumeBattery()
     {
+        if (_batteryVolume <= 0)
+            _currentSpeed = 1f;
+        else
+            _currentSpeed = _moveSpeed;
+
         _batteryVolume = Mathf.MoveTowards(_batteryVolume, 0f, 0.5f * Time.deltaTime);
     }
 }

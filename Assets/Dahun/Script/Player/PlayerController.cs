@@ -8,8 +8,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool _isBlockedByWall = false;
     [SerializeField] private CameraMovement _cameraMovement;
     [SerializeField] private float _rotationSyncSpeed = 20f;
-    private bool _isSyncingRotation;
-    private float _targetYaw;
     private PlayerStats _playerStats;
 
     public bool IsSetDirection;
@@ -39,7 +37,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         RotatePlayer();
-        _moveSpeed = _playerStats.MoveSpeed;
+        _moveSpeed = _playerStats.CurrentSpeed;
         if (Keyboard.current.wKey.isPressed)
         {
             if (!_isBlockedByWall)

@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 public class CameraMovement : MonoBehaviour
 {
     public Transform Player;
-    public PlayerController PlayerController;
 
     [SerializeField] private Vector3 _offset = new Vector3(0, 1, -1.5f);
     [SerializeField] private float _freeLookSensitivity = 0.1f;
