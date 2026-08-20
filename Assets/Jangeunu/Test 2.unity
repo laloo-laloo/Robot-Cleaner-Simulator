@@ -2306,10 +2306,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e78d4e7e0dad05447af5c492a9890b5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZoneManager
-  _zoneUIPanel: {fileID: 0}
-  _zoneNameText: {fileID: 0}
-  _zoneProgressText: {fileID: 0}
-  _zoneProgressSlider: {fileID: 0}
+  _zoneUIPanel: {fileID: 1873784583}
+  _zoneNameText: {fileID: 330889247}
+  _zoneProgressText: {fileID: 1095524423}
+  _zoneProgressSlider: {fileID: 980255736}
 --- !u!4 &340269148
 Transform:
   m_ObjectHideFlags: 0
@@ -4292,7 +4292,7 @@ GameObject:
   - component: {fileID: 542469952}
   m_Layer: 0
   m_Name: BaseStation (1)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16046,7 +16046,7 @@ GameObject:
   - component: {fileID: 1977553612}
   m_Layer: 6
   m_Name: Charging_Position
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
