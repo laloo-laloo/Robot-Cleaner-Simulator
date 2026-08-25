@@ -13,6 +13,19 @@ public class ZoneManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _zoneProgressText;
     [SerializeField] private Slider _zoneProgressSlider;
 
+    [Header("TotalProgress")]
+    [SerializeField] private TextMeshProUGUI _totalProgressText;
+    [SerializeField] private Slider _totalProgressSlider;
+
+    [SerializeField] private AOTZoneUIBinding[] _zoneUIBindings;
+
+    [System.Serializable]
+    public struct AOTZoneUIBinding
+    {
+        public ZoneArea.ZoneType zoneType;
+        public ZoneProgressUIItem uiItem;
+    }
+
     private Dictionary<ZoneArea.ZoneType, ZoneArea> _zoneDict = new Dictionary<ZoneArea.ZoneType, ZoneArea>();
     private ZoneArea.ZoneType _activeZoneType; // 현재 플레이어가 서 있는 방
 
@@ -115,6 +128,53 @@ public class ZoneManager : MonoBehaviour
             case ZoneArea.ZoneType.Hallway2: return "복도2 청소율";
             case ZoneArea.ZoneType.SpareRoom: return "작은방 청소율";
             default: return "구역";
+        }
+    }
+
+    public float GetTotalCleanProgress()
+    {
+        int total = 0;
+        int remaining = 0;
+
+        foreach (var zone in _zoneDict.Values)
+        {
+            total += zone.TotalTrashCount;
+            remaining += zone.CurrentTrashCount;
+        }
+
+        if (total <= 0)
+        {
+            return 100f;
+        }
+
+        int cleaned = total - remaining;
+        return ((float)cleaned / total) * 100f;
+    }
+
+    public void UpdateAllUI()
+    {
+        float totalProgress = GetTotalCleanProgress();
+
+        if (_totalProgressText != null)
+        {
+            _totalProgressText.text = $"전체 청소율: {totalProgress:F1}%";
+        }
+
+        if (_totalProgressSlider != null)
+        {
+            _totalProgressSlider.value = totalProgress / 100f;
+        }
+
+        foreach (var binding in _zoneUIBindings)
+        {
+            // 실제로 해당 구역이 Registered 되어 있는지 체크
+            float progress = GetZoneCleanProgress(binding.zoneType);
+            string name = GetKoreanZoneName(binding.zoneType);
+
+            if (binding.uiItem != null)
+            {
+                binding.uiItem.SetZoneData(name, progress);
+            }
         }
     }
 }
