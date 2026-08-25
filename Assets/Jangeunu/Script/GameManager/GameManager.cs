@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _timerText;
 
     [SerializeField] private PlayerStats _playerStats;
+    [SerializeField] private PauseScript _pauseScript;
 
     private void Awake()
     {
@@ -47,6 +48,20 @@ public class GameManager : MonoBehaviour
         {
             OnClickTitle();
         }
+
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            if (_pauseScript.gameObject.activeSelf)
+            {
+                _pauseScript.CloseUI();
+            }
+            else
+            {
+                _pauseScript.OpenUI();
+            }
+        }
+
+        
 
         if (_destoryTrashCount >= _totalTrashCount && _totalTrashCount > 0)
         {

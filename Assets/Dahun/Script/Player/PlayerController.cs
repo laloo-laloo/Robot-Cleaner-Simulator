@@ -16,8 +16,6 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody _rigidbody;
 
-    public float MouseSensitivity = 0.1f;
-
 
     private void Awake()
     {

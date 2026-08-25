@@ -56,4 +56,10 @@ public class SoundManager : MonoBehaviour
             _moveAudioSource.Stop();
         }
     }
+
+    public void SetSFXVolume(float value)
+    {
+        _sfxSource.volume = value;
+        _moveAudioSource.volume = value;
+    }
 }

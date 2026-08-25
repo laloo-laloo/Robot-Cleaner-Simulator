@@ -12888,7 +12888,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1470708105
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14948,6 +14948,10 @@ MonoBehaviour:
   _rangeFlashEffect: {fileID: 1769467701}
   _batteryFlashEffect: {fileID: 779724661}
   _dustBinFlashEffect: {fileID: 429211248}
+  _moveSpeedMaxObject: {fileID: 0}
+  _rangeMaxObject: {fileID: 0}
+  _batteryMaxObject: {fileID: 0}
+  _dustBinMaxObject: {fileID: 0}
 --- !u!1 &1845323756
 GameObject:
   m_ObjectHideFlags: 0

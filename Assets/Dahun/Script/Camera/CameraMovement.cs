@@ -6,7 +6,7 @@ public class CameraMovement : MonoBehaviour
     public Transform Player;
 
     [SerializeField] private Vector3 _offset = new Vector3(0, 1, -1.5f);
-    [SerializeField] private float _freeLookSensitivity = 0.1f;
+    [SerializeField] private float _freeLookSensitivity;
     [SerializeField] private LayerMask _collisionMask;
     [SerializeField] private float _wallAlpha = 0.25f;
     [SerializeField] private float _cameraRadius = 0.2f;
@@ -27,6 +27,8 @@ public class CameraMovement : MonoBehaviour
         Vector3 desiredPosition = Player.position + yawRotation * _offset;
         transform.position = GetCollisionAdjustedPosition(desiredPosition);
         transform.rotation = yawRotation;
+
+        Debug.Log(_freeLookSensitivity);
     }
 
     private Vector3 GetCollisionAdjustedPosition(Vector3 desiredPosition)
@@ -95,5 +97,10 @@ public class CameraMovement : MonoBehaviour
 
         SetupTransparentMode(_fadedMaterialInstance);
         _fadedMaterialInstance.color = new Color(_originalColor.r, _originalColor.g, _originalColor.b, _wallAlpha);
+    }
+
+    public void SetSensitivity(float value)
+    {
+        _freeLookSensitivity = value;
     }
 }
