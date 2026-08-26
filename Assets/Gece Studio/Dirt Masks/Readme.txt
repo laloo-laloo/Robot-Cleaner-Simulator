@@ -1,0 +1,5 @@
+This package includes 30 dirt masks that can be used in all game engines and all 3D software. All textures are in 4K resolution and are seamless. They can be easily scaled, and their transitions are flawless. You can use the dirt masks in fullscreen effects, camera effects, shaders, VFX, and any other effects you create. Additionally, the textures are designed to be used in reverse, meaning you can invert them to effectively obtain 60 dirt textures.
+
+File Formats
+All textures are provided in widely supported formats such as PNG, ensuring smooth compatibility with industry standard tools and engines, including Unreal Engine, Unity, Blender, Godot, Maya, and 3ds Max.
+This pack is built to adapt to your workflow, no matter which software you use, making it a powerful addition to any artist’s toolkit.

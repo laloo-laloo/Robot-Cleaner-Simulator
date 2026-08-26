@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ab8f49060411abc458de682cd170268b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 320796
+  packageName: "Ground Debris Pack \u2013 Dirt, Rubble, Rocks, Planks & Pavers"
+  packageVersion: 1.0
+  assetPath: Assets/GroundDebris/Ground/Materials/M_Dark.mat
+  uploadId: 758789

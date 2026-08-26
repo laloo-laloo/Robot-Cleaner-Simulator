@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: dc8a23ef662f2074b92bfe8073fd832d
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 320796
+  packageName: "Ground Debris Pack \u2013 Dirt, Rubble, Rocks, Planks & Pavers"
+  packageVersion: 1.0
+  assetPath: Assets/GroundDebris/Prefabs/Prefab_DirtGround_Mesh.prefab
+  uploadId: 758789

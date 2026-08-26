@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e43b570bd58c69646bfed1736a9b5cf3
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 320796
+  packageName: "Ground Debris Pack \u2013 Dirt, Rubble, Rocks, Planks & Pavers"
+  packageVersion: 1.0
+  assetPath: Assets/GroundDebris/3DStone/Materials/MAT_Stone_Corner.mat
+  uploadId: 758789

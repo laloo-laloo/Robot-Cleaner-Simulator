@@ -27,7 +27,7 @@ public class TrashSpawner : MonoBehaviour
         Bounds bounds = _spawnArea.bounds;
         float randomValueX = Random.Range(bounds.min.x, bounds.max.x);
         float randomValueZ = Random.Range(bounds.min.z, bounds.max.z);
-        Vector3 randomPosition = new Vector3(randomValueX, 0.6f, randomValueZ);
+        Vector3 randomPosition = new Vector3(randomValueX, 0.515f, randomValueZ);
 
         // 프리팹 배열 중 무작위 인덱스 선택
         int randomIndex = Random.Range(0, _trashObjects.Length);

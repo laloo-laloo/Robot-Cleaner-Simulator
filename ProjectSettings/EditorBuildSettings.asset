@@ -9,8 +9,8 @@ EditorBuildSettings:
     path: Assets/Jangeunu/Title.unity
     guid: 0dd0fb531a22cab43bcd11538aede04c
   - enabled: 1
-    path: Assets/Jangeunu/1.1.0.unity
-    guid: 644e3627eb604654798e3e65cb9675c4
+    path: Assets/Jangeunu/v1.2.0.unity
+    guid: 8dd59b4db48854d4897782e7381da5c6
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

@@ -67,5 +67,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrashSpawner
   _trashObjects:
-  - {fileID: 147999677007938085, guid: 4fa1ee3608d559b4da05fa075d67b952, type: 3}
+  - {fileID: 2338837549521097534, guid: fe71959e1051d2149ab9510b4c4dcb86, type: 3}
+  - {fileID: 662812226182064156, guid: f4b262a46d1147c46ab19deddf6eff4f, type: 3}
+  - {fileID: 3400591072230831866, guid: 99b5bfc3d75d6af4f8b228099404fbf2, type: 3}
   _spawnArea: {fileID: 3945309604557867527}

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a3772c50ed49fe64e9a938a0794a9a2e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 25800000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 161438
+  packageName: Spillage Decals And Caution Signs
+  packageVersion: Unity 2018.2.4f1 (64-bit)
+  assetPath: Assets/SpillageAndCautionSign/Demo/SpillageAndCautionSign/LightingData.asset
+  uploadId: 348217
