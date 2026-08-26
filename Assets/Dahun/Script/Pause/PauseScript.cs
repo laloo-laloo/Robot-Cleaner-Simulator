@@ -64,6 +64,6 @@ public class PauseScript : MonoBehaviour
     }
     public void Exit()
     {
-
+        GameManager.Instance.OnClickTitle();
     }
 }
