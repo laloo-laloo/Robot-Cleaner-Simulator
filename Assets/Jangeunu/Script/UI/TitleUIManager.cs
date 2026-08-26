@@ -18,7 +18,7 @@ public class TitleUIManager : MonoBehaviour
     public void OnClickStart()
     {
         SoundManager.Instance.PlaySFX(SoundManager.SFX.UIClick);
-        SceneManager.LoadScene("Test 1");
+        SceneManager.LoadScene("1.1.0");
     }
 
     public void OnClickOpenRank()

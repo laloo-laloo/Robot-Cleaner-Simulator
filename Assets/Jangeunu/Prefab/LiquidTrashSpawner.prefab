@@ -66,5 +66,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68d3354cb1eaa2f4892ac405ffc655ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrashSpawner
-  _trashObject: {fileID: 147999677007938085, guid: 4fa1ee3608d559b4da05fa075d67b952, type: 3}
+  _trashObjects:
+  - {fileID: 147999677007938085, guid: 4fa1ee3608d559b4da05fa075d67b952, type: 3}
   _spawnArea: {fileID: 3945309604557867527}
