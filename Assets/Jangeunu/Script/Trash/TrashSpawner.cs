@@ -15,7 +15,7 @@ public class TrashSpawner : MonoBehaviour
             return;
         }
 
-        int randomCount = Random.Range(20, 39); //소환할 쓰레기 개수 랜덤 설정
+        int randomCount = Random.Range(70, 99); //소환할 쓰레기 개수 랜덤 설정
         for (int i = 0; i < randomCount; i++)
         {
             TrashSpawn();

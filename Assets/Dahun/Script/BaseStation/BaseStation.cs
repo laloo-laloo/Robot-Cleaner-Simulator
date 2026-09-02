@@ -24,25 +24,36 @@ public class BaseStation : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             print("플레이어 충돌 감지");
-            Player player =  other.gameObject.GetComponentInParent<Player>();
+            Player player = other.gameObject.GetComponentInParent<Player>();
 
-            player._playerStats.RechargeBattery();
-            player._playerStats.EmptyingDust();
-            player.PlayerMoveStop();
-
-            player.transform.position = transform.position;
-
-            _upgradeUI.OpenUpgradeUI();
-        }
-        if (other.gameObject.CompareTag("Trash"))
-        {
-            TrashObject trash = other.GetComponent<TrashObject>();
-
-            if (trash != null)
+            if (player != null)
             {
-                // 2. 해당 인스턴스의 CleaningTrash() 호출 (내부에서 GameManager 신호 전달 및 Destroy 처리됨)
-                trash.CleaningTrash();
+                player._playerStats.RechargeBattery();
+                player._playerStats.EmptyingDust();
+                player.PlayerMoveStop();
+
+                player.transform.position = transform.position;
+
+                // [추가] 플레이어 바구니에 담긴 큰 쓰레기 비우기
+                ClearBasketTrash(player._playerStats);
+
+                _upgradeUI.OpenUpgradeUI();
             }
+        }
+    }
+
+    // 바구니 속 큰 쓰레기를 처리하는 메서드
+    private void ClearBasketTrash(PlayerStats playerStats)
+    {
+        if (playerStats == null || playerStats.BasketObject == null) return;
+
+        // 바구니 자식(Child)에 붙어있는 모든 TrashObject 탐색 (비활성화된 콜라이더도 포함하여 감지)
+        TrashObject[] carriedTrashes = playerStats.BasketObject.GetComponentsInChildren<TrashObject>();
+
+        foreach (TrashObject trash in carriedTrashes)
+        {
+            // CleaningTrash()를 호출해 GameManager 점수 추가 및 Destroy 처리
+            trash.CleaningTrash();
         }
     }
 }

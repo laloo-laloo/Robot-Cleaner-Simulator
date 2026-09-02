@@ -16,6 +16,7 @@ public class PlayerStats : MonoBehaviour
 
     [SerializeField] private GameObject _moveSpeedMaxObject, _rangeMaxObject, _batteryMaxObject, _dustBinMaxObject;
     [SerializeField] private GameObject _basket;
+    public GameObject BasketObject => _basket;
 
     private CapsuleCollider _capsuleCollider;
     private int[] statLevel = new int[4];
