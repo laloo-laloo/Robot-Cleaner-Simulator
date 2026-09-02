@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -5,6 +6,9 @@ using UnityEngine.UI;
 public class PlayerCleanManager : MonoBehaviour
 {
     public static PlayerCleanManager instance;
+    private bool _isInDanger;
+
+    private Coroutine _blinkCoroutine;
 
     public enum CleaningMode
     {
@@ -59,17 +63,33 @@ public class PlayerCleanManager : MonoBehaviour
 
     private void CheckReturnCondition()
     {
-        if (_player.CheckBatteryValue() <= 10f || _player.CheckDustValue() >= 99.9f)
+        if (_player.CheckBatteryValue() <= 15f || _player.CheckDustValue() >= 85f)
         {
-            _warning.gameObject.SetActive(true);
-            if (_player.CheckBatteryValue() <= 0f)
+            if (!_isInDanger)
             {
-
+                _isInDanger = true;
+                _blinkCoroutine = StartCoroutine(BlinkingWarning());
             }
         }
         else
         {
+            _isInDanger = false;
+            if (_blinkCoroutine != null)
+            {
+                StopCoroutine(_blinkCoroutine);
+            }
             _warning.gameObject.SetActive(false);
+        }
+    }
+
+    private IEnumerator BlinkingWarning()
+    {
+        while (_isInDanger)
+        {
+            _warning.gameObject.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+            _warning.gameObject.SetActive(false);
+            yield return new WaitForSeconds(0.5f);
         }
     }
 }

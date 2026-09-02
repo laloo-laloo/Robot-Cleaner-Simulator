@@ -81,10 +81,14 @@ public class UpgradeUI : MonoBehaviour
 
     public void OpenUpgradeUI()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         gameObject.SetActive(true);
     }
     public void CloseUpgradeUI()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         gameObject.SetActive(false);
     }
 }

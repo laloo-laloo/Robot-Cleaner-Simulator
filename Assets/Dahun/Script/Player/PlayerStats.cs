@@ -136,11 +136,11 @@ public class PlayerStats : MonoBehaviour
 
     public void MoveSpeedUp()
     {
-        Upgrade(StatType.MoveSpeed, 1f);
+        Upgrade(StatType.MoveSpeed, 0.5f);
     }
     public void BatteryUp()
     {
-        Upgrade(StatType.Battery, 25f);
+        Upgrade(StatType.Battery, 10f);
     }
     public void RangeUp()
     {
@@ -148,7 +148,7 @@ public class PlayerStats : MonoBehaviour
     }
     public void DustBinUp()
     {
-        Upgrade(StatType.DustBin, 25f);
+        Upgrade(StatType.DustBin, 10f);
     }
 
     public void EmptyingDust()
@@ -184,7 +184,7 @@ public class PlayerStats : MonoBehaviour
         else
             _currentSpeed = _moveSpeed;
 
-        _batteryVolume = Mathf.MoveTowards(_batteryVolume, 0f, 0.5f * Time.deltaTime);
+        _batteryVolume = Mathf.MoveTowards(_batteryVolume, 0f, 0.8f * Time.deltaTime);
     }
 
     private void CheckMaxLevel(StatType type)

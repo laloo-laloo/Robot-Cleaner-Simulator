@@ -53,10 +53,14 @@ public class GameManager : MonoBehaviour
         {
             if (_pauseScript.gameObject.activeSelf)
             {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
                 _pauseScript.CloseUI();
             }
             else
             {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 _pauseScript.OpenUI();
             }
         }
