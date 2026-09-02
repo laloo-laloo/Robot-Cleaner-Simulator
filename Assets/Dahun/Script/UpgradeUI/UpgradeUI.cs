@@ -8,6 +8,9 @@ public class UpgradeUI : MonoBehaviour
     [SerializeField] private TMP_Text _moveSpeedStatCostText, _rangeStatCostText, _batteryStatCostText, _dustBinStatCostText, _currentGoldText;
     [SerializeField] private TMP_Text _moveSpeedStatLVText, _rangeStatLVText, _batteryStatLVText, _dustBinStatLVText;
     [SerializeField] private TMP_Text _moveSpeedAmountText, _rangeAmountText, _batteryAmountText, _dustBinAmountText;
+    [SerializeField] private TMP_Text _basketUpgradeText, _basketLVText;
+
+    private bool _isBasketUpgrade;
 
     private static readonly PlayerStats.StatType[] _statTypes =
     {
@@ -90,5 +93,14 @@ public class UpgradeUI : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         gameObject.SetActive(false);
+    }
+    public void UpdateBasketPurchasButton()
+    {
+        if (!_isBasketUpgrade)
+        {
+            _basketUpgradeText.text = "Max";
+            _basketLVText.text = "Owned";
+            PlayerStats.BuyingBasket();
+        }
     }
 }

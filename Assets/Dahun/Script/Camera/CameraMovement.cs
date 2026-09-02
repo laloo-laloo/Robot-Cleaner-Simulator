@@ -18,8 +18,15 @@ public class CameraMovement : MonoBehaviour
     private float _freeYaw;
     public float FreeYaw => _freeYaw;
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
     void LateUpdate()
     {
+        if (Cursor.lockState != CursorLockMode.Locked) return;
+
         Vector2 mouseDelta = Mouse.current.delta.ReadValue();
         _freeYaw = (_freeYaw + mouseDelta.x * _freeLookSensitivity) % 360f;
 

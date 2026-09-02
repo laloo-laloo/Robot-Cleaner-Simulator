@@ -15,6 +15,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private ParticleSystem _moveSpeedFlashEffect, _rangeFlashEffect, _batteryFlashEffect, _dustBinFlashEffect;
 
     [SerializeField] private GameObject _moveSpeedMaxObject, _rangeMaxObject, _batteryMaxObject, _dustBinMaxObject;
+    [SerializeField] private GameObject _basket;
 
     private CapsuleCollider _capsuleCollider;
     private int[] statLevel = new int[4];
@@ -198,6 +199,15 @@ public class PlayerStats : MonoBehaviour
             case StatType.Range: _rangeMaxObject.SetActive(isMax); break;
             case StatType.Battery: _batteryMaxObject.SetActive(isMax); break;
             case StatType.DustBin: _dustBinMaxObject.SetActive(isMax); break;
+        }
+    }
+    public void BuyingBasket()
+    {
+        SoundManager.Instance.PlaySFX(SoundManager.SFX.Upgrade);
+        if (_gold >= 100f)
+        {
+            _gold -= 100;
+            _basket.SetActive(true);
         }
     }
 }
