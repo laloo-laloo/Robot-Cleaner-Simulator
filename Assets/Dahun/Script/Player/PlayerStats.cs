@@ -16,6 +16,22 @@ public class PlayerStats : MonoBehaviour
 
     [SerializeField] private GameObject _moveSpeedMaxObject, _rangeMaxObject, _batteryMaxObject, _dustBinMaxObject;
     [SerializeField] private GameObject _basket;
+    [SerializeField] private int _basketMaxCapacity = 1; // 기본 최대 용량 (필요 시 수정/업그레이드 가능)
+
+    public int BasketMaxCapacity => _basketMaxCapacity;
+
+    // 현재 바구니에 담긴 큰 쓰레기 개수 반환
+    public int CurrentCarryingTrashCount
+    {
+        get
+        {
+            if (_basket == null) return 0;
+            return _basket.GetComponentsInChildren<TrashObject>().Length;
+        }
+    }
+
+    // 바구니에 더 담을 수 있는지 확인
+    public bool CanCarryMoreTrash => CurrentCarryingTrashCount < _basketMaxCapacity;
     public GameObject BasketObject => _basket;
 
     private CapsuleCollider _capsuleCollider;

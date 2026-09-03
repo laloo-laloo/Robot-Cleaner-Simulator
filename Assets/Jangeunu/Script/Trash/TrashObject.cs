@@ -77,34 +77,35 @@ public class TrashObject : MonoBehaviour
 
         bool hasBasket = player.BasketObject != null && player.BasketObject.activeSelf;
 
-        if (hasBasket)
+        // 바구니가 있고, 바구니 용량이 남아있는지 확인
+        if (hasBasket && player.CanCarryMoreTrash)
         {
-            // 최상위 부모(자신) 전체를 바구니에 부착
-            AttachToBasket(player.BasketObject.transform);
+            // 바구니 위치로 부착 (이미 여러 개일 경우 위치 겹침 방지를 위해 살짝 위로 쌓이게 Offset 조절)
+            int currentCount = player.CurrentCarryingTrashCount;
+            Vector3 spawnOffset = new Vector3(0, 0.2f + (currentCount * 0.15f), 0);
+
+            AttachToBasket(player.BasketObject.transform, spawnOffset);
         }
         else
         {
-            // 튕겨나갈 때도 전체가 함께 이동
+            // 바구니가 없거나 용량이 다 찼으면 튕겨나감
             BounceAway(playerTransform.position);
         }
     }
 
-    private void AttachToBasket(Transform basketTransform)
+    private void AttachToBasket(Transform basketTransform, Vector3 offset)
     {
-        // 1. 최상위 및 모든 자식의 물리/콜라이더 비활성화
         if (_rb != null) _rb.isKinematic = true;
         if (_collider != null) _collider.enabled = false;
 
-        // 2. 자식들 중 콜라이더가 따로 있다면 모두 꺼줍니다.
         Collider[] childColliders = GetComponentsInChildren<Collider>();
         foreach (Collider col in childColliders)
         {
             col.enabled = false;
         }
 
-        // 3. 최상위 부모 오브젝트 자체를 바구니 자식으로 이동
         transform.SetParent(basketTransform);
-        transform.localPosition = new Vector3(0, 0.2f, 0); // Y값 조절
+        transform.localPosition = offset; // 개수에 따라 차곡차곡 쌓임
         transform.localRotation = Quaternion.identity;
     }
 
