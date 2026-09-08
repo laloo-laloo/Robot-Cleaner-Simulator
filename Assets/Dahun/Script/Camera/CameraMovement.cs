@@ -9,7 +9,7 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private float _freeLookSensitivity;
     [SerializeField] private LayerMask _collisionMask;
     [SerializeField] private float _wallAlpha = 0.25f;
-    [SerializeField] private float _cameraRadius = 0.5f;
+    [SerializeField] private float _cameraRadius = 0.3f;
     //[SerializeField] private float _fadeSpeed = 8f;
     private Renderer _fadedRenderer;
     private Material _fadedMaterialInstance;

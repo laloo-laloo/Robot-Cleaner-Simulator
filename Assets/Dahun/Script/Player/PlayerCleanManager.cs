@@ -9,7 +9,7 @@ public class PlayerCleanManager : MonoBehaviour
     public static PlayerCleanManager instance;
     private bool _isInDanger;
 
-    [SerializeField] private TMP_Text _currentMode;
+    [SerializeField] private TMP_Text _currentMode, _warningText;
 
     private Coroutine _blinkCoroutine;
 
@@ -52,14 +52,14 @@ public class PlayerCleanManager : MonoBehaviour
     {
         if (Mode == CleaningMode.Sweeping)
         {
-            _currentMode.text = "Wiping";
+            _currentMode.text = "Mode : Liquid";
             _WipingImage.gameObject.SetActive(true);
             _SweepingImage.gameObject.SetActive(false);
             Mode = CleaningMode.Wiping;
         }
         else
         {
-            _currentMode.text = "Sweeping";
+            _currentMode.text = "Mode : Dust";
             _WipingImage.gameObject.SetActive(false);
             _SweepingImage.gameObject.SetActive(true);
             Mode = CleaningMode.Sweeping;
@@ -70,12 +70,25 @@ public class PlayerCleanManager : MonoBehaviour
     {
         if (_player.CheckBatteryValue() <= 15f || _player.CheckDustValue() >= 85f)
         {
+            if (_player.CheckBatteryValue() <= 15f && _player.CheckDustValue() >= 85f)
+            {
+                _warningText.text = "Low Battery\nMax Dust";
+            }
+            else if (_player.CheckBatteryValue() <= 15f)
+            {
+                _warningText.text = "Low Battery";
+            }
+            else
+            {
+                _warningText.text = "Max Dust";
+            }
             if (!_isInDanger)
             {
                 _isInDanger = true;
                 _blinkCoroutine = StartCoroutine(BlinkingWarning());
             }
         }
+
         else
         {
             _isInDanger = false;
