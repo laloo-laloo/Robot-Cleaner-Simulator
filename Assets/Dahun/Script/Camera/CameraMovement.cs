@@ -9,7 +9,7 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private float _freeLookSensitivity;
     [SerializeField] private LayerMask _collisionMask;
     [SerializeField] private float _wallAlpha = 0.25f;
-    [SerializeField] private float _cameraRadius = 0.2f;
+    [SerializeField] private float _cameraRadius = 0.5f;
     //[SerializeField] private float _fadeSpeed = 8f;
     private Renderer _fadedRenderer;
     private Material _fadedMaterialInstance;
@@ -17,6 +17,12 @@ public class CameraMovement : MonoBehaviour
 
     private float _freeYaw;
     public float FreeYaw => _freeYaw;
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, 0.5f);
+    }
 
     private void Start()
     {
@@ -43,9 +49,24 @@ public class CameraMovement : MonoBehaviour
         Vector3 direction = desiredPosition - Player.position;
         float distance = direction.magnitude;
 
-        if (Physics.SphereCast(Player.position, _cameraRadius, direction.normalized, out RaycastHit hit, distance, _collisionMask))
+        bool hitWall = Physics.SphereCast(Player.position, _cameraRadius, direction.normalized, out RaycastHit hit, distance, _collisionMask);
+        Renderer targetRenderer = hitWall ? hit.collider.GetComponent<Renderer>() : null;
+
+        // 경로상 감지 실패 시, 카메라 도착 지점 자체가 벽에 파묻혔는지 추가 체크
+        if (!hitWall)
         {
-            SetWallTransparent(hit.collider.GetComponent<Renderer>());
+            Collider[] overlaps = Physics.OverlapSphere(desiredPosition, _cameraRadius, _collisionMask);
+            Debug.Log("Overlap count: " + overlaps.Length);
+            if (overlaps.Length > 0)
+            {
+                hitWall = true;
+                targetRenderer = overlaps[0].GetComponent<Renderer>();
+            }
+        }
+
+        if (hitWall)
+        {
+            SetWallTransparent(targetRenderer);
         }
         else
         {

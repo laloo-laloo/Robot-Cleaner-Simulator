@@ -33,6 +33,7 @@ public class UpgradeUI : MonoBehaviour
     void Start()
     {
         UpdateUI();
+        _isBasketUpgrade = false;
     }
 
     // Update is called once per frame
@@ -98,9 +99,12 @@ public class UpgradeUI : MonoBehaviour
     {
         if (!_isBasketUpgrade)
         {
+            if (PlayerStats.Gold >= 100)
+            {
             _basketUpgradeText.text = "Max";
             _basketLVText.text = "Owned";
             PlayerStats.BuyingBasket();
+            }
         }
     }
 }

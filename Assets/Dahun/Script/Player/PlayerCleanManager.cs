@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -7,6 +8,8 @@ public class PlayerCleanManager : MonoBehaviour
 {
     public static PlayerCleanManager instance;
     private bool _isInDanger;
+
+    [SerializeField] private TMP_Text _currentMode;
 
     private Coroutine _blinkCoroutine;
 
@@ -49,12 +52,14 @@ public class PlayerCleanManager : MonoBehaviour
     {
         if (Mode == CleaningMode.Sweeping)
         {
+            _currentMode.text = "Wiping";
             _WipingImage.gameObject.SetActive(true);
             _SweepingImage.gameObject.SetActive(false);
             Mode = CleaningMode.Wiping;
         }
         else
         {
+            _currentMode.text = "Sweeping";
             _WipingImage.gameObject.SetActive(false);
             _SweepingImage.gameObject.SetActive(true);
             Mode = CleaningMode.Sweeping;

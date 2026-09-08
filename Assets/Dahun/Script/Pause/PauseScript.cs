@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class PauseScript : MonoBehaviour
@@ -51,6 +52,9 @@ public class PauseScript : MonoBehaviour
     public void ClosePauseUI()
     {
         _pausePanel.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(null);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
     public void OpenVideo()
     {
