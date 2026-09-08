@@ -77,6 +77,28 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public string GetTrashName(TrashObject.TrashType type)
+    {
+        return type switch
+        {
+            TrashObject.TrashType.Dust => "먼지",
+            TrashObject.TrashType.Liquid => "얼룩",
+            TrashObject.TrashType.Big => "큰 쓰레기",
+            _ => "쓰레기"
+        };
+    }
+
+    public Color GetTrashColor(TrashObject.TrashType type)
+    {
+        return type switch
+        {
+            TrashObject.TrashType.Dust => Color.yellow,                       // 노랑
+            TrashObject.TrashType.Liquid => new Color(0.2f, 0.6f, 1f),       // 하늘색
+            TrashObject.TrashType.Big => new Color(1f, 0.5f, 0f),            // 주황색
+            _ => Color.white
+        };
+    }
+
     private void UpdateTimer()
     {
         _currentTime += Time.deltaTime;
@@ -85,17 +107,21 @@ public class GameManager : MonoBehaviour
         _timerText.text = $"{minutes:D2}:{seconds:D2}";
     }
 
-    public void AddCleanProgress(ZoneArea.ZoneType zoneType)
+    public void AddCleanProgress(ZoneArea.ZoneType zoneType, TrashObject.TrashType trashType)
     {
         if (_totalTrashCount > _destoryTrashCount)
         {
-            _destoryTrashCount++; // 전체 파괴 카운트 증가 (클리어 조건용)
-
+            _destoryTrashCount++;
             _playerStats.AddGold(1);
-            // 구역 관리자에게만 UI 갱신 요청!
+
+            // 1. 쓰레기 이름과 색상 꺼내기
+            string trashName = GetTrashName(trashType);
+            Color textColor = GetTrashColor(trashType);
+
+            // 2. ZoneManager 호출 시 전달 (ZoneManager.OnTrashCleaned 메서드 매개변수도 동일하게 확장)
             if (ZoneManager.Instance != null)
             {
-                ZoneManager.Instance.OnTrashCleaned(zoneType);
+                ZoneManager.Instance.OnTrashCleaned(zoneType, trashName, textColor);
             }
         }
     }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class TrashObject : MonoBehaviour
 {
-    private enum TrashType
+    public enum TrashType
     {
         Dust,
         Liquid,
@@ -129,7 +129,7 @@ public class TrashObject : MonoBehaviour
             {
                 Debug.Log("쓸기");
                 SoundManager.Instance.PlaySFX(SoundManager.SFX.SuckDust);
-                GameManager.Instance.AddCleanProgress(_zoneType);
+                GameManager.Instance.AddCleanProgress(_zoneType, _trashType);
                 player.AddDust();
                 Destroy(gameObject);
             }
@@ -142,14 +142,14 @@ public class TrashObject : MonoBehaviour
         {
             Debug.Log("닦기");
             SoundManager.Instance.PlaySFX(SoundManager.SFX.WipeLipuid);
-            GameManager.Instance.AddCleanProgress(_zoneType);
+            GameManager.Instance.AddCleanProgress(_zoneType, _trashType);
             Destroy(gameObject);
         }
     }
 
     public bool CleaningTrash() // 큰 쓰레기 치우기 위한 BaseStation 호출용
     {
-        GameManager.Instance.AddCleanProgress(_zoneType);
+        GameManager.Instance.AddCleanProgress(_zoneType, _trashType);
         Destroy(gameObject);
         return true;
     }
