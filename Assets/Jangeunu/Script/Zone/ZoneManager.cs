@@ -69,16 +69,29 @@ public class ZoneManager : MonoBehaviour
     }
 
     // 특정 구역에서 쓰레기가 지워졌을 때 (GameManager에서 호출)
-    public void OnTrashCleaned(ZoneArea.ZoneType zoneType)
+
+    public void OnTrashCleaned(ZoneArea.ZoneType zoneType, string trashName, Color textColor)
     {
         if (_zoneDict.TryGetValue(zoneType, out ZoneArea targetZone))
         {
+            // 1. 해당 쓰레기 1개가 전체 구역 청소율에서 차지하는 % 계산
+            float totalCount = targetZone.TotalTrashCount;
+            float progressAmount = (totalCount > 0) ? (1f / totalCount) * 100f : 0f;
+
+            // 2. 구역 쓰레기 카운트 차감
             targetZone.CleanOneTrash();
 
-            // 현재 플레이어가 서 있는 방의 쓰레기가 지워졌다면 UI 즉시 갱신
+            // 3. 현재 보고 있는 방 UI 갱신
             if (_activeZoneType == zoneType)
             {
                 UpdateZoneUI(zoneType);
+            }
+
+            // 4. 플로팅 텍스트 호출!
+            if (FloatingTextManager.Instance != null)
+            {
+                string message = $"{trashName} +{progressAmount:F1}%";
+                FloatingTextManager.Instance.ShowText(message, textColor);
             }
         }
     }

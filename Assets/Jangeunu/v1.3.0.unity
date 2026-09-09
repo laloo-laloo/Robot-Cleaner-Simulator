@@ -4681,8 +4681,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uC751\uC811\uC2E4 \uCCAD\uC18C\uC728"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3c782093a6f840948bdac1f15f6a3554, type: 2}
-  m_sharedMaterial: {fileID: -1517128193739863852, guid: 3c782093a6f840948bdac1f15f6a3554, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c0154f9514f4d464ba28f79b868eee28, type: 2}
+  m_sharedMaterial: {fileID: 2253400152907874517, guid: c0154f9514f4d464ba28f79b868eee28, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -10232,7 +10232,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 5.1395264, y: -532.3396}
+  m_AnchoredPosition: {x: 5.1394043, y: -532.3396}
   m_SizeDelta: {x: 10.292, y: -1064.698}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &697936288
@@ -14231,7 +14231,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 963.1091, y: 0}
+  m_AnchoredPosition: {x: 963.109, y: 0}
   m_SizeDelta: {x: -1905.674, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &953652538
@@ -14625,6 +14625,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1873784584}
+  - {fileID: 1379772369}
   m_Father: {fileID: 2002499973}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.825}
@@ -16318,8 +16319,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 00%
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3c782093a6f840948bdac1f15f6a3554, type: 2}
-  m_sharedMaterial: {fileID: -1517128193739863852, guid: 3c782093a6f840948bdac1f15f6a3554, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c0154f9514f4d464ba28f79b868eee28, type: 2}
+  m_sharedMaterial: {fileID: 2253400152907874517, guid: c0154f9514f4d464ba28f79b868eee28, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -21313,6 +21314,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1369812990}
   m_CullTransparentMesh: 1
+--- !u!1 &1379772368
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1379772369}
+  - component: {fileID: 1379772370}
+  m_Layer: 5
+  m_Name: FloatingTextContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1379772369
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1379772368}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 965473080}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -44.500023}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1379772370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1379772368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 505bc5b9929d3674b8d6ac47e070baef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FloatingTextManager
+  _floatingTextPrefab: {fileID: 5772564835490619503, guid: 4d9053c6081703f4290ddd9ede773adb, type: 3}
+  _spawnTransform: {fileID: 1379772369}
+  _randomOffsetRange: 15
 --- !u!1 &1384691463
 GameObject:
   m_ObjectHideFlags: 0
@@ -22559,7 +22611,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 5.1306763, y: 545.13}
+  m_AnchoredPosition: {x: 5.130615, y: 545.13}
   m_SizeDelta: {x: 10.274, y: -1069.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1425611986
@@ -35343,47 +35395,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2034028535732227533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5590910433626458666}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94186df37fb1e444dabd18d94c06851d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RoboticVacuumCleaner
-  leftWheel: {fileID: 5082659991430499027}
-  rightWheel: {fileID: 8586210486904422566}
-  driveWheelRadius: 0.072
-  trackWidth: 0.115
-  frontPivot: {fileID: 3298726127474647087}
-  frontWheel: {fileID: 8561815851244520093}
-  casterWheelRadius: 0.0155
-  brush: {fileID: 3285734245860862521}
-  brushRPM: 100
-  brushSpinEasing: 2
-  brushEnabled: 0
-  mopR: {fileID: 6029538219328208625}
-  mopL: {fileID: 4760482265924695435}
-  mopRPM: 100
-  mopSpinEasing: 3
-  mopsEnabled: 0
-  rollers:
-  - {fileID: 6174285231768473638}
-  - {fileID: 1211107967782295672}
-  rollerRPM: 100
-  rollerSpinEasing: 3
-  rollersEnabled: 0
-  cap: {fileID: 8314488057015772933}
-  capOffset: 0.011
-  capEasing: 2
-  maxSpeed: 0.5
-  movePower: 0.5
-  verticalAxis: Vertical
-  horizontalAxis: Horizontal
 --- !u!33 &2043324590110018776
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -48765,7 +48776,6 @@ GameObject:
   - component: {fileID: 4893446971654873187}
   - component: {fileID: 8969979046925430886}
   - component: {fileID: 1977645027096620779}
-  - component: {fileID: 2034028535732227533}
   m_Layer: 0
   m_Name: Robotic_Vacuum_Cleaner_Blue_spec
   m_TagString: Untagged
