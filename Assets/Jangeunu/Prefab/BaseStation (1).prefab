@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 5644791800065731413}
   - component: {fileID: 8137433991375094848}
   - component: {fileID: 1950440356671911199}
-  - component: {fileID: 4051539645965983380}
+  - component: {fileID: 8840926257959871519}
   m_Layer: 6
   m_Name: BaseStation (1)
   m_TagString: Wall
@@ -213,8 +213,8 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4051539645965983380
-MeshCollider:
+--- !u!65 &8840926257959871519
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -231,7 +231,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 689396047407314367, guid: 2cdd35fbdb0725948859f8dfb0ca4639, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 0.51000005, y: 0.54600173, z: 0.24}
+  m_Center: {x: 0, y: 0.3, z: -0.1}
