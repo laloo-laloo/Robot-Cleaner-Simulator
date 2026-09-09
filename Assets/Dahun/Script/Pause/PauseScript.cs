@@ -48,7 +48,6 @@ public class PauseScript : MonoBehaviour
     public void OpenPauseUI()
     {
         _pausePanel.SetActive(true);
-        Time.timeScale = 0f;
     }
     public void ClosePauseUI()
     {
@@ -56,7 +55,6 @@ public class PauseScript : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        Time.timeScale = 1f;
     }
     public void OpenVideo()
     {

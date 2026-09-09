@@ -61,6 +61,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Debug.Log("FixedUpdate called, timeScale: " + Time.timeScale);
         if (_isMoving && !_isBlockedByWall)
         {
             MoveForward();

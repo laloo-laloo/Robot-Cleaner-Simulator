@@ -15,6 +15,13 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private ParticleSystem _moveSpeedFlashEffect, _rangeFlashEffect, _batteryFlashEffect, _dustBinFlashEffect;
 
     [SerializeField] private GameObject _moveSpeedMaxObject, _rangeMaxObject, _batteryMaxObject, _dustBinMaxObject;
+
+    [SerializeField] private GameObject[] _moveSpeedLevelObjects;
+    [SerializeField] private GameObject[] _rangeLevelObjects;
+    [SerializeField] private GameObject[] _batteryLevelObjects;
+    [SerializeField] private GameObject[] _dustBinLevelObjects;
+
+
     [SerializeField] private GameObject _basket;
     [SerializeField] private int _basketMaxCapacity = 1; // 기본 최대 용량 (필요 시 수정/업그레이드 가능)
 
@@ -133,6 +140,7 @@ public class PlayerStats : MonoBehaviour
         PlayUpgradeFlash(type);
 
         CheckMaxLevel(type);
+        UpdateAppearance(type);
     }
 
     private void PlayUpgradeFlash(StatType type)
@@ -218,6 +226,28 @@ public class PlayerStats : MonoBehaviour
             case StatType.DustBin: _dustBinMaxObject.SetActive(isMax); break;
         }
     }
+    private void UpdateAppearance(StatType type)
+    {
+        int index = (int)type;
+        int level = statLevel[index];
+
+        GameObject[] targetObjects = type switch
+        {
+            StatType.MoveSpeed => _moveSpeedLevelObjects,
+            StatType.Range => _rangeLevelObjects,
+            StatType.Battery => _batteryLevelObjects,
+            StatType.DustBin => _dustBinLevelObjects,
+            _ => null
+        };
+
+        if (targetObjects == null) return;
+
+        for (int i = 0; i < targetObjects.Length; i++)
+        {
+            targetObjects[i].SetActive(i == level);
+        }
+    }
+
     public void BuyingBasket()
     {
         SoundManager.Instance.PlaySFX(SoundManager.SFX.Upgrade);

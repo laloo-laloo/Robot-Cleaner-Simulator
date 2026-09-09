@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
+                Time.timeScale = 1f;
                 _pauseScript.CloseUI();
             }
             else
@@ -60,6 +61,7 @@ public class GameManager : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 _pauseScript.OpenUI();
+                Time.timeScale = 0f;
             }
         }
 
