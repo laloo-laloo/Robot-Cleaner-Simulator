@@ -14,8 +14,7 @@ public class GameManager : MonoBehaviour
 
     [Header("UI References")]
     [SerializeField] private GameObject _clearPanel;
-    [SerializeField] private TextMeshProUGUI _clearTimeResultText;
-    [SerializeField] private TextMeshProUGUI _timerText;
+    [SerializeField] private TextMeshProUGUI _clearResultText;
 
     [SerializeField] private PlayerStats _playerStats;
     [SerializeField] private PauseScript _pauseScript;
@@ -71,18 +70,6 @@ public class GameManager : MonoBehaviour
         {
             GameClear();
         }
-        else
-        {
-            UpdateTimer();
-        }
-    }
-
-    private void UpdateTimer()
-    {
-        _currentTime += Time.deltaTime;
-        int minutes = (int)(_currentTime / 60);
-        int seconds = (int)(_currentTime % 60);
-        _timerText.text = $"{minutes:D2}:{seconds:D2}";
     }
 
     public void AddCleanProgress(ZoneArea.ZoneType zoneType)
@@ -103,9 +90,8 @@ public class GameManager : MonoBehaviour
     private void GameClear()
     {
         _clearPanel.SetActive(true);
-        _clearTimeResultText.text = "클리어 시간: " + _timerText.text;
+        _clearResultText.text = "클리어";
 
-        PlayerPrefs.SetFloat("LatestScore", _currentTime);
         PlayerPrefs.Save();
     }
 

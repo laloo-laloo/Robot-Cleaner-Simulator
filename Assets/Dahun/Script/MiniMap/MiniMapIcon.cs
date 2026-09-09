@@ -4,7 +4,6 @@ public class MiniMapIcon : MonoBehaviour
 {
     [SerializeField] private Transform _target; // 월드에 있는 실제 오브젝트
     [SerializeField] private RectTransform _iconRect;
-    [SerializeField] private float _scale = 1f; // 월드 좌표 → 미니맵 좌표 축소 비율
 
     private const float WorldWidth = 55.97f;
     private const float WorldHeight = 52.6f;
