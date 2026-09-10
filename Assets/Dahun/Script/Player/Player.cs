@@ -69,7 +69,7 @@ public class Player : MonoBehaviour
     public float CheckBatteryValue() => _batterySlider.value;
     
 
-    public void PlayerMoveStop()
+    public void PlayerParkingStation()
     {
         _playerController.PlayerMoveStop();
     }

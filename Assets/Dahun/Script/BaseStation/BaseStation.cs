@@ -30,7 +30,7 @@ public class BaseStation : MonoBehaviour
             {
                 player._playerStats.RechargeBattery();
                 player._playerStats.EmptyingDust();
-                player.PlayerMoveStop();
+                player.PlayerParkingStation();
 
                 player.transform.position = transform.position;
 

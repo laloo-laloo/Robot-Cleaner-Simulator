@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private PlayerStats _playerStats;
 
     public bool IsSetDirection;
+    public bool IsCanMove;
 
     private float _moveSpeed;
 
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
 
         _isMoving = false;
         IsSetDirection = false;
+        IsCanMove = true;
     }
 
     // Update is called once per frame
@@ -39,7 +41,7 @@ public class PlayerController : MonoBehaviour
         _moveSpeed = _playerStats.CurrentSpeed;
         if (Keyboard.current.wKey.isPressed)
         {
-            if (!_isBlockedByWall)
+            if (!_isBlockedByWall && IsCanMove)
             {
                 SetDirection();
                 _isMoving = true;
@@ -61,8 +63,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Debug.Log("FixedUpdate called, timeScale: " + Time.timeScale);
-        if (_isMoving && !_isBlockedByWall)
+        if (_isMoving && !_isBlockedByWall && IsCanMove)
         {
             MoveForward();
         }

@@ -4,6 +4,7 @@ using UnityEngine;
 public class UpgradeUI : MonoBehaviour
 {
     public PlayerStats PlayerStats;
+    public PlayerController PlayerController;
 
     [SerializeField] private TMP_Text _moveSpeedStatCostText, _rangeStatCostText, _batteryStatCostText, _dustBinStatCostText, _currentGoldText;
     [SerializeField] private TMP_Text _moveSpeedStatLVText, _rangeStatLVText, _batteryStatLVText, _dustBinStatLVText;
@@ -88,12 +89,14 @@ public class UpgradeUI : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         gameObject.SetActive(true);
+        PlayerController.IsCanMove = false;
     }
     public void CloseUpgradeUI()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         gameObject.SetActive(false);
+        PlayerController.IsCanMove = true;
     }
     public void UpdateBasketPurchasButton()
     {
