@@ -69,6 +69,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TrashObject
   _trashType: 0
   _zoneType: 0
+  _bounceForce: 3
+  _cleanDustTrashParticlePrefab: {fileID: 5044455493421458116, guid: fd86fedfaf5a34624aa1a2d159617023, type: 3}
+  _cleanLiquidParticlePrefab: {fileID: 0}
+  _cleanBigTrashParticlePrefab: {fileID: 0}
 --- !u!1001 &4805942552123810860
 PrefabInstance:
   m_ObjectHideFlags: 0

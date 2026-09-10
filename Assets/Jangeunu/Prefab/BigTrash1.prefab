@@ -98,6 +98,9 @@ MonoBehaviour:
   _trashType: 2
   _zoneType: 0
   _bounceForce: 3
+  _cleanDustTrashParticlePrefab: {fileID: 0}
+  _cleanLiquidParticlePrefab: {fileID: 0}
+  _cleanBigTrashParticlePrefab: {fileID: 3125322680521254148, guid: 1d58d9da886f004c6910167922a62d09, type: 3}
 --- !u!1 &7578085160504852155
 GameObject:
   m_ObjectHideFlags: 0

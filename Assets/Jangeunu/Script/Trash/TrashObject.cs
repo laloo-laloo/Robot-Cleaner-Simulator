@@ -17,6 +17,11 @@ public class TrashObject : MonoBehaviour
     [Header("Big Trash Settings")]
     [SerializeField] private float _bounceForce = 3f; // 바구니 없을 때 튕겨나가는 힘
 
+    [Header("Trash Effects")]
+    [SerializeField] private GameObject _cleanDustTrashParticlePrefab;   // 먼지 흡입 시 터지는 이펙트
+    [SerializeField] private GameObject _cleanLiquidParticlePrefab; // 액체 닦을 시 터지는 이펙트
+    [SerializeField] private GameObject _cleanBigTrashParticlePrefab; // 큰 쓰레기 소멸 시 터질 파티클 프리팹
+
     private Rigidbody _rb;
     private Collider _collider;
 
@@ -123,6 +128,7 @@ public class TrashObject : MonoBehaviour
 
     private void ProcessSuckUp(PlayerCleanManager.CleaningMode mode, PlayerStats player)
     {
+        // 1. 먼지(Dust) 청소
         if (mode == PlayerCleanManager.CleaningMode.Sweeping && _trashType == TrashType.Dust)
         {
             if (player.DustVolume < player.DustMaxVolume)
@@ -131,6 +137,8 @@ public class TrashObject : MonoBehaviour
                 SoundManager.Instance.PlaySFX(SoundManager.SFX.SuckDust);
                 GameManager.Instance.AddCleanProgress(_zoneType, _trashType);
                 player.AddDust();
+
+                SpawnEffect(_cleanDustTrashParticlePrefab);
                 Destroy(gameObject);
             }
             else
@@ -138,19 +146,35 @@ public class TrashObject : MonoBehaviour
                 Debug.Log("먼지통 용량 부족");
             }
         }
+        // 2. 액체(Liquid) 청소
         else if (mode == PlayerCleanManager.CleaningMode.Wiping && _trashType == TrashType.Liquid)
         {
             Debug.Log("닦기");
             SoundManager.Instance.PlaySFX(SoundManager.SFX.WipeLipuid);
             GameManager.Instance.AddCleanProgress(_zoneType, _trashType);
+
+            SpawnEffect(_cleanLiquidParticlePrefab);
             Destroy(gameObject);
         }
     }
 
-    public bool CleaningTrash() // 큰 쓰레기 치우기 위한 BaseStation 호출용
+    // 3. 큰 쓰레기(Big) 청소 (BaseStation에서 호출)
+    public bool CleaningTrash()
     {
+        SpawnEffect(_cleanBigTrashParticlePrefab);
         GameManager.Instance.AddCleanProgress(_zoneType, _trashType);
         Destroy(gameObject);
         return true;
+    }
+
+    private void SpawnEffect(GameObject particlePrefab)
+    {
+        if (particlePrefab == null) return;
+
+        GameObject effect = Instantiate(particlePrefab, transform.position, Quaternion.identity);
+        ParticleSystem ps = effect.GetComponent<ParticleSystem>();
+
+        float destroyDelay = (ps != null) ? ps.main.duration + ps.main.startLifetime.constantMax : 2.0f;
+        Destroy(effect, destroyDelay);
     }
 }
