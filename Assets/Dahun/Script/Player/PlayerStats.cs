@@ -160,19 +160,19 @@ public class PlayerStats : MonoBehaviour
         effect.Play();
     }
 
-    public void MoveSpeedUp()
+    public void UpgradeMoveSpeed()
     {
         Upgrade(StatType.MoveSpeed, 0.5f);
     }
-    public void BatteryUp()
+    public void UpgradeBattery()
     {
         Upgrade(StatType.Battery, 10f);
     }
-    public void RangeUp()
+    public void UpgradeRange()
     {
         Upgrade(StatType.Range, 0.2f);
     }
-    public void DustBinUp()
+    public void UpgradeDustBin()
     {
         Upgrade(StatType.DustBin, 10f);
     }
