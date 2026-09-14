@@ -36,7 +36,7 @@ public class BaseStation : MonoBehaviour
 
                 // [추가] 플레이어 바구니에 담긴 큰 쓰레기 비우기
                 ClearBasketTrash(player._playerStats);
-
+                
                 _upgradeUI.OpenUpgradeUI();
             }
         }
@@ -47,6 +47,7 @@ public class BaseStation : MonoBehaviour
     {
         if (playerStats == null || playerStats.BasketObject == null) return;
 
+        playerStats.GuideArrow.SetActive(false);
         // 바구니 자식(Child)에 붙어있는 모든 TrashObject 탐색 (비활성화된 콜라이더도 포함하여 감지)
         TrashObject[] carriedTrashes = playerStats.BasketObject.GetComponentsInChildren<TrashObject>();
 

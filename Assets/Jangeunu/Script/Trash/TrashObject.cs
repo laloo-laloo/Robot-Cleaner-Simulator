@@ -73,6 +73,7 @@ public class TrashObject : MonoBehaviour
             PlayerStats player = collision.gameObject.GetComponent<PlayerStats>();
             // collision.collider 대신 플레이어의 Transform을 전달합니다.
             HandleBigTrashInteraction(collision.transform, player);
+            player.GuideArrow.SetActive(true);
         }
     }
 

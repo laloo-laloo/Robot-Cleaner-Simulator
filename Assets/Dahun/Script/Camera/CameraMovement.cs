@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,10 +11,8 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private LayerMask _collisionMask;
     [SerializeField] private float _wallAlpha = 0.25f;
     [SerializeField] private float _cameraRadius = 0.3f;
-    //[SerializeField] private float _fadeSpeed = 8f;
-    private Renderer _fadedRenderer;
-    private Material _fadedMaterialInstance;
-    private Color _originalColor;
+
+    private readonly Dictionary<Renderer, (Material mat, Color originalColor)> _fadedWalls = new();
 
     private float _freeYaw;
     public float FreeYaw => _freeYaw;
@@ -29,6 +28,7 @@ public class CameraMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
+
     void LateUpdate()
     {
         if (Cursor.lockState != CursorLockMode.Locked) return;
@@ -40,8 +40,6 @@ public class CameraMovement : MonoBehaviour
         Vector3 desiredPosition = Player.position + yawRotation * _offset;
         transform.position = GetCollisionAdjustedPosition(desiredPosition);
         transform.rotation = yawRotation;
-
-        Debug.Log(_freeLookSensitivity);
     }
 
     private Vector3 GetCollisionAdjustedPosition(Vector3 desiredPosition)
@@ -49,28 +47,45 @@ public class CameraMovement : MonoBehaviour
         Vector3 direction = desiredPosition - Player.position;
         float distance = direction.magnitude;
 
-        bool hitWall = Physics.SphereCast(Player.position, _cameraRadius, direction.normalized, out RaycastHit hit, distance, _collisionMask);
-        Renderer targetRenderer = hitWall ? hit.collider.GetComponent<Renderer>() : null;
+        HashSet<Renderer> currentHits = new HashSet<Renderer>();
 
-        // 경로상 감지 실패 시, 카메라 도착 지점 자체가 벽에 파묻혔는지 추가 체크
-        if (!hitWall)
+        // 경로상 벽 감지 (SphereCast는 여러 개를 한 번에 못 잡으니 CastAll 사용)
+        RaycastHit[] pathHits = Physics.SphereCastAll(Player.position, _cameraRadius, direction.normalized, distance, _collisionMask);
+        foreach (var h in pathHits)
         {
-            Collider[] overlaps = Physics.OverlapSphere(desiredPosition, _cameraRadius, _collisionMask);
-            Debug.Log("Overlap count: " + overlaps.Length);
-            if (overlaps.Length > 0)
+            Renderer r = h.collider.GetComponent<Renderer>();
+            if (r != null) currentHits.Add(r);
+        }
+
+        // 카메라 도착 지점 자체가 벽에 파묻혔는지 추가 체크
+        Collider[] overlaps = Physics.OverlapSphere(desiredPosition, _cameraRadius, _collisionMask);
+        foreach (var col in overlaps)
+        {
+            Renderer r = col.GetComponent<Renderer>();
+            if (r != null) currentHits.Add(r);
+        }
+
+        // 새로 닿은 것들은 투명하게
+        foreach (var r in currentHits)
+        {
+            if (!_fadedWalls.ContainsKey(r))
             {
-                hitWall = true;
-                targetRenderer = overlaps[0].GetComponent<Renderer>();
+                SetWallTransparent(r);
             }
         }
 
-        if (hitWall)
+        // 더 이상 안 닿는 것들은 복구
+        List<Renderer> toRestore = new List<Renderer>();
+        foreach (var r in _fadedWalls.Keys)
         {
-            SetWallTransparent(targetRenderer);
+            if (!currentHits.Contains(r))
+            {
+                toRestore.Add(r);
+            }
         }
-        else
+        foreach (var r in toRestore)
         {
-            RestoreWall();
+            RestoreWall(r);
         }
 
         return desiredPosition;
@@ -102,29 +117,25 @@ public class CameraMovement : MonoBehaviour
         mat.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Geometry;
     }
 
-    private void RestoreWall()
+    private void RestoreWall(Renderer targetRenderer)
     {
-        if (_fadedMaterialInstance == null) return;
+        if (!_fadedWalls.TryGetValue(targetRenderer, out var data)) return;
 
-        _fadedMaterialInstance.color = _originalColor;
-        SetupOpaqueMode(_fadedMaterialInstance);
+        data.mat.color = data.originalColor;
+        SetupOpaqueMode(data.mat);
 
-        _fadedRenderer = null;
-        _fadedMaterialInstance = null;
+        _fadedWalls.Remove(targetRenderer);
     }
 
     private void SetWallTransparent(Renderer targetRenderer)
     {
-        if (_fadedRenderer == targetRenderer) return;
+        Material matInstance = targetRenderer.material; // 인스턴스화됨 (공유 머티리얼 안 건드림)
+        Color originalColor = matInstance.color;
 
-        RestoreWall();
+        SetupTransparentMode(matInstance);
+        matInstance.color = new Color(originalColor.r, originalColor.g, originalColor.b, _wallAlpha);
 
-        _fadedRenderer = targetRenderer;
-        _fadedMaterialInstance = targetRenderer.material; // 인스턴스화됨 (공유 머티리얼 안 건드림)
-        _originalColor = _fadedMaterialInstance.color;
-
-        SetupTransparentMode(_fadedMaterialInstance);
-        _fadedMaterialInstance.color = new Color(_originalColor.r, _originalColor.g, _originalColor.b, _wallAlpha);
+        _fadedWalls[targetRenderer] = (matInstance, originalColor);
     }
 
     public void SetSensitivity(float value)

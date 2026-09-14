@@ -16,15 +16,18 @@ public class PlayerStats : MonoBehaviour
 
     [SerializeField] private GameObject _moveSpeedMaxObject, _rangeMaxObject, _batteryMaxObject, _dustBinMaxObject;
 
+
     [SerializeField] private GameObject[] _moveSpeedLevelObjects;
     [SerializeField] private GameObject[] _rangeLevelObjects;
     [SerializeField] private GameObject[] _batteryLevelObjects;
     [SerializeField] private GameObject[] _dustBinLevelObjects;
 
+    
 
     [SerializeField] private GameObject _basket;
-    [SerializeField] private int _basketMaxCapacity = 1; // 기본 최대 용량 (필요 시 수정/업그레이드 가능)
-
+    [SerializeField] private int _basketMaxCapacity = 1; // 기본 최대 용량
+    
+    public GameObject GuideArrow;
     public int BasketMaxCapacity => _basketMaxCapacity;
 
     // 현재 바구니에 담긴 큰 쓰레기 개수 반환
@@ -95,6 +98,32 @@ public class PlayerStats : MonoBehaviour
         {
             _gold += 100;
         }
+
+        Transform target = GetClosestBaseStation();
+        if (target == null) return;
+
+        Vector3 dir = target.position - GuideArrow.transform.position;
+        dir.y = 0; // 수평 방향만 가리키게
+        GuideArrow.transform.rotation = Quaternion.LookRotation(dir);
+    }
+
+    private Transform GetClosestBaseStation()
+    {
+        BaseStation[] stations = FindObjectsByType<BaseStation>(FindObjectsSortMode.None);
+        Transform closest = null;
+        float minDistance = float.MaxValue;
+
+        foreach (var station in stations)
+        {
+            float distance = Vector3.Distance(transform.position, station.transform.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                closest = station.transform;
+            }
+        }
+
+        return closest;
     }
 
     private void Init()
