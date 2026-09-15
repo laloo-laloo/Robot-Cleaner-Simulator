@@ -6,8 +6,10 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private bool _isMoving;
     [SerializeField] private bool _isBlockedByWall = false;
-    [SerializeField] private CameraMovement _cameraMovement;
     [SerializeField] private float _rotationSyncSpeed = 20f;
+    [SerializeField] private CameraMovement _cameraMovement;
+    [SerializeField] private LayerMask _collisionMask;
+
     private PlayerStats _playerStats;
 
     public bool IsSetDirection;
@@ -16,11 +18,12 @@ public class PlayerController : MonoBehaviour
     private float _moveSpeed;
 
     private Rigidbody _rigidbody;
+    private CapsuleCollider _capsuleCollider;
 
 
     private void Awake()
     {
-        
+        _capsuleCollider = GetComponent<CapsuleCollider>();
         _playerStats = GetComponent<PlayerStats>();
     }
 
@@ -39,6 +42,7 @@ public class PlayerController : MonoBehaviour
     {
         RotatePlayer();
         _moveSpeed = _playerStats.CurrentSpeed;
+
         if (Keyboard.current.wKey.isPressed)
         {
             if (!_isBlockedByWall && IsCanMove)
@@ -52,9 +56,6 @@ public class PlayerController : MonoBehaviour
                 PlayerMoveStop();
             }
         }
-
-        
-
         if (IsSetDirection)
             _rigidbody.constraints |= RigidbodyConstraints.FreezeRotationY;
         else
@@ -92,7 +93,26 @@ public class PlayerController : MonoBehaviour
 
     private void MoveForward()
     {
-        _rigidbody.MovePosition(_rigidbody.position + transform.forward * _moveSpeed * Time.fixedDeltaTime);
+        float moveDistance = _moveSpeed * Time.fixedDeltaTime;
+        float radius = _capsuleCollider.radius;
+
+        if (Physics.SphereCast(_rigidbody.position, radius, transform.forward, out RaycastHit hit, moveDistance, _collisionMask))
+        {
+            // 벽에 거의 다 닿았으면(정면충돌) 멈춤 처리
+            if (Vector3.Dot(transform.forward, hit.normal) < -0.45f)
+            {
+                PlayerMoveStop();
+                return;
+            }
+
+            // 벽 표면을 따라 미끄러지는 방향 계산
+            Vector3 slideDirection = Vector3.ProjectOnPlane(transform.forward, hit.normal).normalized;
+            _rigidbody.MovePosition(_rigidbody.position + slideDirection * moveDistance);
+        }
+        else
+        {
+            _rigidbody.MovePosition(_rigidbody.position + transform.forward * moveDistance);
+        }
     }
 
     private void OnCollisionExit(Collision collision)
@@ -109,6 +129,11 @@ public class PlayerController : MonoBehaviour
         {
             SoundManager.Instance.PlaySFX(SoundManager.SFX.BumpWall);
             PlayerMoveStop();
+        }
+        if (collision.contactCount > 0)
+        {
+            Vector3 normal = collision.GetContact(0).normal;
+            _rigidbody.position += normal * 0.05f;
         }
     }
 
