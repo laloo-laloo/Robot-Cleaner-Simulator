@@ -73,7 +73,6 @@ public class TrashObject : MonoBehaviour
             PlayerStats player = collision.gameObject.GetComponent<PlayerStats>();
             // collision.collider 대신 플레이어의 Transform을 전달합니다.
             HandleBigTrashInteraction(collision.transform, player);
-            player.GuideArrow.SetActive(true);
         }
     }
 
@@ -89,7 +88,7 @@ public class TrashObject : MonoBehaviour
             // 바구니 위치로 부착 (이미 여러 개일 경우 위치 겹침 방지를 위해 살짝 위로 쌓이게 Offset 조절)
             int currentCount = player.CurrentCarryingTrashCount;
             Vector3 spawnOffset = new Vector3(0, 0.2f + (currentCount * 0.15f), 0);
-
+            player.GuideArrow.SetActive(true);
             AttachToBasket(player.BasketObject.transform, spawnOffset);
         }
         else

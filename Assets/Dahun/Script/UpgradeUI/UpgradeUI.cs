@@ -43,6 +43,11 @@ public class UpgradeUI : MonoBehaviour
         
     }
 
+    public void UpdateGoldUI()
+    {
+        _currentGoldText.text = PlayerStats.Gold + "$";
+    }
+
     private void OnEnable()
     {
         UpdateUI();
@@ -61,8 +66,7 @@ public class UpgradeUI : MonoBehaviour
 
             UpgradeAmountText(type);
         }
-
-        _currentGoldText.text = PlayerStats.Gold + "$";
+        UpdateGoldUI();
     }
 
     public void UpgradeAmountText(PlayerStats.StatType type)

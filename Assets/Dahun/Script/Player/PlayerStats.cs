@@ -66,6 +66,7 @@ public class PlayerStats : MonoBehaviour
     public void AddGold(float amount)
     {
         _gold += amount;
+        _upgradeUI.UpdateGoldUI();
     }
     public int GetStatLevel(StatType type) => statLevel[(int)type] + 1;
     public float GetUpgradeCost(StatType type)

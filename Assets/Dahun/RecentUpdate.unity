@@ -3426,7 +3426,7 @@ GameObject:
   - component: {fileID: 213108045}
   - component: {fileID: 213108044}
   - component: {fileID: 213108043}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7497,7 +7497,6 @@ GameObject:
   - component: {fileID: 455194860}
   - component: {fileID: 455194863}
   - component: {fileID: 455194862}
-  - component: {fileID: 455194861}
   m_Layer: 5
   m_Name: GoldTextBackground
   m_TagString: Untagged
@@ -7514,32 +7513,17 @@ RectTransform:
   m_GameObject: {fileID: 455194859}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7199996, y: 0.7199996, z: 0.7199996}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1480137498}
-  m_Father: {fileID: 1102764215}
+  m_Father: {fileID: 2002499973}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 578.39, y: 473.56}
-  m_SizeDelta: {x: -1490.5, y: -836.934}
+  m_AnchoredPosition: {x: 341, y: 464.1}
+  m_SizeDelta: {x: -1127.4159, y: -632.69403}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &455194861
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 455194859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Shadow
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 0, y: -7.22}
-  m_UseGraphicAlpha: 1
 --- !u!114 &455194862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17160,7 +17144,6 @@ RectTransform:
   - {fileID: 1831477511}
   - {fileID: 1638467343}
   - {fileID: 2010374822}
-  - {fileID: 455194860}
   - {fileID: 121333323}
   m_Father: {fileID: 2002499973}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -32576,6 +32559,7 @@ RectTransform:
   - {fileID: 1134635450}
   - {fileID: 659654968}
   - {fileID: 1102764215}
+  - {fileID: 455194860}
   - {fileID: 296320402}
   - {fileID: 1208345570}
   - {fileID: 1746401440}
