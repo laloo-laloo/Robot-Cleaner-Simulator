@@ -17,7 +17,6 @@ public class ZoneArea : MonoBehaviour
     [Header("Zone Settings")]
     [SerializeField] private ZoneType _zoneType;
 
-    // 1. 단일 변수 대신 배열로 변경
     [SerializeField] private BoxCollider[] _zoneColliders;
 
     public ZoneType CurrentZoneType => _zoneType;
@@ -26,16 +25,13 @@ public class ZoneArea : MonoBehaviour
 
     private void Start()
     {
-        // Inspector에서 할당을 잊었을 경우 자식/본인의 BoxCollider를 자동 탐색
         if (_zoneColliders == null || _zoneColliders.Length == 0)
         {
             _zoneColliders = GetComponents<BoxCollider>();
         }
 
-        // 중복 쓰레기 수집을 방지하기 위한 HashSet
         HashSet<TrashObject> uniqueTrashes = new HashSet<TrashObject>();
 
-        // 2. 등록된 모든 BoxCollider 영역을 스캔
         foreach (BoxCollider col in _zoneColliders)
         {
             if (col == null) continue;
@@ -51,27 +47,31 @@ public class ZoneArea : MonoBehaviour
                 TrashObject trash = hit.GetComponent<TrashObject>();
                 if (trash != null)
                 {
-                    uniqueTrashes.Add(trash); // 이미 추가된 쓰레기면 자동 중복 제외
+                    uniqueTrashes.Add(trash);
                 }
             }
         }
 
-        TotalTrashCount = uniqueTrashes.Count;
+        // [수정 포인트 1] 단순 개수(Count)가 아닌 가중치(GetTrashWeight)의 합산으로 Total 계산
+        int totalWeight = 0;
+        foreach (TrashObject trash in uniqueTrashes)
+        {
+            totalWeight += trash.GetTrashWeight();
+        }
+
+        TotalTrashCount = totalWeight;
         CurrentTrashCount = TotalTrashCount;
 
-        // 3. ZoneManager에 등록
         if (ZoneManager.Instance != null)
         {
             ZoneManager.Instance.RegisterZone(_zoneType, this);
         }
     }
 
-    public void CleanOneTrash()
+    // [수정 포인트 2] 프로퍼티인 CurrentTrashCount를 직접 차감하도록 수정
+    public void CleanTrash(int weight)
     {
-        if (CurrentTrashCount > 0)
-        {
-            CurrentTrashCount--;
-        }
+        CurrentTrashCount = Mathf.Max(0, CurrentTrashCount - weight);
     }
 
     private void OnTriggerEnter(Collider other)

@@ -76,6 +76,30 @@ public class TrashObject : MonoBehaviour
         }
     }
 
+    // 1. 청소율 상승을 위한 가중치 (청소율 팍팍)
+    public int GetTrashWeight()
+    {
+        return _trashType switch
+        {
+            TrashType.Dust => 1,    // 먼지: 1점
+            TrashType.Liquid => 1,  // 액체: 1점
+            TrashType.Big => 500,     // 큰 쓰레기: 1000점 (청소율 대폭 상승!)
+            _ => 1
+        };
+    }
+
+    // 2. 실제로 플레이어에게 줄 골드 양 (밸런스에 맞게 지정)
+    public int GetTrashGold()
+    {
+        return _trashType switch
+        {
+            TrashType.Dust => 1,    // 먼지: 1 골드
+            TrashType.Liquid => 1,  // 액체: 1 골드
+            TrashType.Big => 50,     // 큰 쓰레기: 50 골드
+            _ => 1
+        };
+    }
+
     private void HandleBigTrashInteraction(Transform playerTransform, PlayerStats player)
     {
         if (player == null) return;
@@ -126,43 +150,43 @@ public class TrashObject : MonoBehaviour
         _rb.AddForce(forceVector * _bounceForce, ForceMode.Impulse);
     }
 
+    // ProcessSuckUp에서 GetTrashGold() 전달
     private void ProcessSuckUp(PlayerCleanManager.CleaningMode mode, PlayerStats player)
     {
-        // 1. 먼지(Dust) 청소
         if (mode == PlayerCleanManager.CleaningMode.Sweeping && _trashType == TrashType.Dust)
         {
             if (player.DustVolume < player.DustMaxVolume)
             {
-                Debug.Log("쓸기");
                 SoundManager.Instance.PlaySFX(SoundManager.SFX.SuckDust);
-                GameManager.Instance.AddCleanProgress(_zoneType, _trashType);
+
+                //  weight와 gold를 따로 전달
+                GameManager.Instance.AddCleanProgress(_zoneType, _trashType, GetTrashWeight(), GetTrashGold());
                 player.AddDust();
 
                 SpawnEffect(_cleanDustTrashParticlePrefab);
                 Destroy(gameObject);
             }
-            else
-            {
-                Debug.Log("먼지통 용량 부족");
-            }
         }
-        // 2. 액체(Liquid) 청소
         else if (mode == PlayerCleanManager.CleaningMode.Wiping && _trashType == TrashType.Liquid)
         {
-            Debug.Log("닦기");
             SoundManager.Instance.PlaySFX(SoundManager.SFX.WipeLipuid);
-            GameManager.Instance.AddCleanProgress(_zoneType, _trashType);
+
+            //  weight와 gold를 따로 전달
+            GameManager.Instance.AddCleanProgress(_zoneType, _trashType, GetTrashWeight(), GetTrashGold());
 
             SpawnEffect(_cleanLiquidParticlePrefab);
             Destroy(gameObject);
         }
     }
 
-    // 3. 큰 쓰레기(Big) 청소 (BaseStation에서 호출)
+    // CleaningTrash(큰 쓰레기)에서도 전달
     public bool CleaningTrash()
     {
         SpawnEffect(_cleanBigTrashParticlePrefab);
-        GameManager.Instance.AddCleanProgress(_zoneType, _trashType);
+
+        // weight와 gold를 따로 전달
+        GameManager.Instance.AddCleanProgress(_zoneType, _trashType, GetTrashWeight(), GetTrashGold());
+
         Destroy(gameObject);
         return true;
     }

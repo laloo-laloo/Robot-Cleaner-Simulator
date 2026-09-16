@@ -35,9 +35,14 @@ public class GameManager : MonoBehaviour
         if (_clearPanel != null)
             _clearPanel.SetActive(false);
 
-        // 클리어 판단을 위해 전체 쓰레기 수 카운트는 유지
+        // 단순 개수가 아닌 '가중치 합산'으로 TotalTrashCount 계산
         TrashObject[] allTrashes = FindObjectsByType<TrashObject>(FindObjectsSortMode.None);
-        _totalTrashCount = allTrashes.Length;
+        _totalTrashCount = 0;
+
+        foreach (var trash in allTrashes)
+        {
+            _totalTrashCount += trash.GetTrashWeight(); // Big 쓰레기는 30으로 카운트됨
+        }
     }
 
     private void Update()
@@ -95,21 +100,25 @@ public class GameManager : MonoBehaviour
         };
     }
 
-    public void AddCleanProgress(ZoneArea.ZoneType zoneType, TrashObject.TrashType trashType)
+    public void AddCleanProgress(ZoneArea.ZoneType zoneType, TrashObject.TrashType trashType, int weight = 1, int gold = 1)
     {
         if (_totalTrashCount > _destoryTrashCount)
         {
-            _destoryTrashCount++;
-            _playerStats.AddGold(1);
+            // 1. 파괴 카운트(청소율)는 weight 만큼 증가
+            _destoryTrashCount += weight;
 
-            // 1. 쓰레기 이름과 색상 꺼내기
+            // 2. 플레이어 골드는 별도의 gold 매개변수 값만큼만 증가
+            if (_playerStats != null)
+            {
+                _playerStats.AddGold(gold); // weight가 아닌 gold 할당!
+            }
+
             string trashName = GetTrashName(trashType);
             Color textColor = GetTrashColor(trashType);
 
-            // 2. ZoneManager 호출 시 전달 (ZoneManager.OnTrashCleaned 메서드 매개변수도 동일하게 확장)
             if (ZoneManager.Instance != null)
             {
-                ZoneManager.Instance.OnTrashCleaned(zoneType, trashName, textColor);
+                ZoneManager.Instance.OnTrashCleaned(zoneType, trashName, textColor, weight);
             }
         }
     }
