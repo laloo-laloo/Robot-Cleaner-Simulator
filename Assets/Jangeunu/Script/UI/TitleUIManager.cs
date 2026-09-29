@@ -3,11 +3,10 @@ using UnityEngine.SceneManagement;
 
 public class TitleUIManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _rankPanel;
 
     void Start()
     {
-        _rankPanel.SetActive(false);
+
     }
 
     void Update()
@@ -18,19 +17,7 @@ public class TitleUIManager : MonoBehaviour
     public void OnClickStart()
     {
         SoundManager.Instance.PlaySFX(SoundManager.SFX.UIClick);
-        SceneManager.LoadScene("v1.4.0");
-    }
-
-    public void OnClickOpenRank()
-    {
-        SoundManager.Instance.PlaySFX(SoundManager.SFX.UIClick);
-        _rankPanel.SetActive(true);
-    }
-
-    public void OnClickCloseRank()
-    {
-        SoundManager.Instance.PlaySFX(SoundManager.SFX.UIClick);
-        _rankPanel.SetActive(false);
+        SceneManager.LoadScene("v1.5.0");
     }
 
     public void OnClickExit()
