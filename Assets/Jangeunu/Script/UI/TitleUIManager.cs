@@ -17,7 +17,7 @@ public class TitleUIManager : MonoBehaviour
     public void OnClickStart()
     {
         SoundManager.Instance.PlaySFX(SoundManager.SFX.UIClick);
-        SceneManager.LoadScene("v1.5.0");
+        SceneManager.LoadScene("v1.6.0");
     }
 
     public void OnClickExit()

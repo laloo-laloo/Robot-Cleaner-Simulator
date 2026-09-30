@@ -11,7 +11,8 @@ public class SoundManager : MonoBehaviour
         WipeLipuid,
         BumpWall,
         UIClick,
-        RechargingBattery
+        RechargingBattery,
+        ButtonSelect
     }
 
     [SerializeField] private AudioSource _sfxSource;
