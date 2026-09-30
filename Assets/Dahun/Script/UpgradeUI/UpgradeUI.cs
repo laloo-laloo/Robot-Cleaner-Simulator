@@ -71,19 +71,22 @@ public class UpgradeUI : MonoBehaviour
 
     public void UpgradeAmountText(PlayerStats.StatType type)
     {
+        float cost = PlayerStats.GetUpgradeCost(type);
+        bool isMax = cost == -1;
+
         switch (type)
         {
             case PlayerStats.StatType.Battery:
-                _batteryAmountText.text = $"{PlayerStats.BatteryMaxVolume} -> {PlayerStats.BatteryMaxVolume + 25f}";
+                _batteryAmountText.text = isMax ? "Max" : $"{PlayerStats.BatteryMaxVolume} -> {PlayerStats.BatteryMaxVolume + 25f}";
                 break;
             case PlayerStats.StatType.DustBin:
-                _dustBinAmountText.text = $"{PlayerStats.DustMaxVolume} -> {PlayerStats.DustMaxVolume + 25f}";
+                _dustBinAmountText.text = isMax ? "Max" : $"{PlayerStats.DustMaxVolume} -> {PlayerStats.DustMaxVolume + 25f}";
                 break;
             case PlayerStats.StatType.MoveSpeed:
-                _moveSpeedAmountText.text = $"{PlayerStats.MoveSpeed} -> {PlayerStats.MoveSpeed + 1f}";
+                _moveSpeedAmountText.text = isMax ? "Max" : $"{PlayerStats.MoveSpeed} -> {PlayerStats.MoveSpeed + 1f}";
                 break;
             case PlayerStats.StatType.Range:
-                _rangeAmountText.text = $"{PlayerStats.Range} -> {PlayerStats.Range + 0.2f}";
+                _rangeAmountText.text = isMax ? "Max" : $"{PlayerStats.Range} -> {PlayerStats.Range + 0.2f}";
                 break;
         }
     }
