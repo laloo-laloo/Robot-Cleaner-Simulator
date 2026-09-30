@@ -73,14 +73,21 @@ public class PlayerCleanManager : MonoBehaviour
             if (_player.CheckBatteryValue() <= 15f && _player.CheckDustValue() >= 85f)
             {
                 _warningText.text = "배터리 부족\n먼지통 용량 부족";
+                _player.StartBlinkBattery();
+                _player.StartBlinkDust();
+
             }
             else if (_player.CheckBatteryValue() <= 15f)
             {
                 _warningText.text = "배터리 부족";
+                _player.StartBlinkBattery();
+                _player.StopBlinkDust();
             }
-            else
+            else if(_player.CheckDustValue() >= 85f)
             {
                 _warningText.text = "먼지통 용량 부족";
+                _player.StartBlinkDust();
+                _player.StopBlinkBattery();
             }
             if (!_isInDanger)
             {
@@ -88,7 +95,6 @@ public class PlayerCleanManager : MonoBehaviour
                 _blinkCoroutine = StartCoroutine(BlinkingWarning());
             }
         }
-
         else
         {
             _isInDanger = false;
@@ -97,6 +103,8 @@ public class PlayerCleanManager : MonoBehaviour
                 StopCoroutine(_blinkCoroutine);
             }
             _warning.gameObject.SetActive(false);
+            _player.StopBlinkBattery();
+            _player.StopBlinkDust();
         }
     }
 
