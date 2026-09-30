@@ -52,14 +52,14 @@ public class PlayerCleanManager : MonoBehaviour
     {
         if (Mode == CleaningMode.Sweeping)
         {
-            _currentMode.text = "Mode : Liquid";
+            _currentMode.text = "닦기";
             _WipingImage.gameObject.SetActive(true);
             _SweepingImage.gameObject.SetActive(false);
             Mode = CleaningMode.Wiping;
         }
         else
         {
-            _currentMode.text = "Mode : Dust";
+            _currentMode.text = "쓸기";
             _WipingImage.gameObject.SetActive(false);
             _SweepingImage.gameObject.SetActive(true);
             Mode = CleaningMode.Sweeping;
@@ -72,15 +72,15 @@ public class PlayerCleanManager : MonoBehaviour
         {
             if (_player.CheckBatteryValue() <= 15f && _player.CheckDustValue() >= 85f)
             {
-                _warningText.text = "Low Battery\nMax Dust";
+                _warningText.text = "배터리 부족\n먼지통 용량 부족";
             }
             else if (_player.CheckBatteryValue() <= 15f)
             {
-                _warningText.text = "Low Battery";
+                _warningText.text = "배터리 부족";
             }
             else
             {
-                _warningText.text = "Max Dust";
+                _warningText.text = "먼지통 용량 부족";
             }
             if (!_isInDanger)
             {

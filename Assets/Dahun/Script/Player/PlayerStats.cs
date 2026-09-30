@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -22,7 +23,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private GameObject[] _batteryLevelObjects;
     [SerializeField] private GameObject[] _dustBinLevelObjects;
 
-    
+    [SerializeField] private TMP_Text __goldText;
 
     [SerializeField] private GameObject _basket;
     [SerializeField] private int _basketMaxCapacity = 1; // 기본 최대 용량
@@ -66,7 +67,7 @@ public class PlayerStats : MonoBehaviour
     public void AddGold(float amount)
     {
         _gold += amount;
-        _upgradeUI.UpdateGoldUI();
+        updateGold();
     }
     public int GetStatLevel(StatType type) => statLevel[(int)type] + 1;
     public float GetUpgradeCost(StatType type)
@@ -74,6 +75,11 @@ public class PlayerStats : MonoBehaviour
         int level = statLevel[(int)type];
         if (level >= Cost.GetLength(1)) return -1;
         return Cost[(int)type, level];
+    }
+
+    private void updateGold()
+    {
+        __goldText.text = Gold + "$";
     }
 
     private void Awake()

@@ -50564,6 +50564,7 @@ MonoBehaviour:
   - {fileID: 39541750}
   - {fileID: 74461838}
   - {fileID: 1422175621}
+  __goldText: {fileID: 1480137496}
   _basket: {fileID: 124224812}
   _basketMaxCapacity: 1
   GuideArrow: {fileID: 1422180462}

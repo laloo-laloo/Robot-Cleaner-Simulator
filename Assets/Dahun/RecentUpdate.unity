@@ -673,7 +673,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SFX
+  m_text: "\uD6A8\uACFC\uC74C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c0154f9514f4d464ba28f79b868eee28, type: 2}
   m_sharedMaterial: {fileID: 2253400152907874517, guid: c0154f9514f4d464ba28f79b868eee28, type: 2}
@@ -1228,7 +1228,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Video
+  m_text: "\uBE44\uB514\uC624"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c0154f9514f4d464ba28f79b868eee28, type: 2}
   m_sharedMaterial: {fileID: 2253400152907874517, guid: c0154f9514f4d464ba28f79b868eee28, type: 2}
@@ -1443,7 +1443,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Battery
+  m_text: "\uBC30\uD130\uB9AC"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c0154f9514f4d464ba28f79b868eee28, type: 2}
   m_sharedMaterial: {fileID: 2253400152907874517, guid: c0154f9514f4d464ba28f79b868eee28, type: 2}
@@ -9844,7 +9844,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Dust
+  m_text: "\uBA3C\uC9C0\uD1B5"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c0154f9514f4d464ba28f79b868eee28, type: 2}
   m_sharedMaterial: {fileID: 2253400152907874517, guid: c0154f9514f4d464ba28f79b868eee28, type: 2}
@@ -25038,7 +25038,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -428, y: -104}
+  m_AnchoredPosition: {x: -370, y: -104}
   m_SizeDelta: {x: 205.326, y: 51.332}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &461531749
@@ -25061,7 +25061,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Resolution
+  m_text: "\uD574\uC0C1\uB3C4"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c0154f9514f4d464ba28f79b868eee28, type: 2}
   m_sharedMaterial: {fileID: 2253400152907874517, guid: c0154f9514f4d464ba28f79b868eee28, type: 2}
@@ -25095,7 +25095,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -46230,7 +46230,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: BGM
+  m_text: "\uBC30\uACBD\uC74C\uC545"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c0154f9514f4d464ba28f79b868eee28, type: 2}
   m_sharedMaterial: {fileID: 2253400152907874517, guid: c0154f9514f4d464ba28f79b868eee28, type: 2}
@@ -48683,7 +48683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 434456653fe93404481974cc391bbe70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraMovement
-  Player: {fileID: 0}
+  Player: {fileID: 998505770}
   _offset: {x: 0, y: 1, z: -2}
   _freeLookSensitivity: 0.1
   _collisionMask:
@@ -50462,12 +50462,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9092ba0b6d9d9241a3b88c9f35fc427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCleanManager
-  _currentMode: {fileID: 0}
-  _warningText: {fileID: 0}
+  _currentMode: {fileID: 2077145071}
+  _warningText: {fileID: 817705149}
   Mode: 0
-  _warning: {fileID: 0}
-  _SweepingImage: {fileID: 0}
-  _WipingImage: {fileID: 0}
+  _warning: {fileID: 1910619666}
+  _SweepingImage: {fileID: 1452276321}
+  _WipingImage: {fileID: 2099421292}
 --- !u!114 &998505765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50483,7 +50483,7 @@ MonoBehaviour:
   _isMoving: 0
   _isBlockedByWall: 0
   _rotationSyncSpeed: 8
-  _cameraMovement: {fileID: 0}
+  _cameraMovement: {fileID: 917435852}
   _collisionMask:
     serializedVersion: 2
     m_Bits: 0
@@ -50502,8 +50502,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   _playerStats: {fileID: 998505767}
-  _dustSlider: {fileID: 0}
-  _batterySlider: {fileID: 0}
+  _dustSlider: {fileID: 833694061}
+  _batterySlider: {fileID: 11743537}
 --- !u!114 &998505767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50523,7 +50523,7 @@ MonoBehaviour:
   _moveSpeed: 0
   _gold: 0
   _currentSpeed: 0
-  _upgradeUI: {fileID: 0}
+  _upgradeUI: {fileID: 1102764216}
   _moveSpeedFlashEffect: {fileID: 0}
   _rangeFlashEffect: {fileID: 0}
   _batteryFlashEffect: {fileID: 0}
@@ -50548,6 +50548,7 @@ MonoBehaviour:
   - {fileID: 39541750}
   - {fileID: 74461838}
   - {fileID: 1422175621}
+  __goldText: {fileID: 1480137496}
   _basket: {fileID: 124224812}
   _basketMaxCapacity: 1
   GuideArrow: {fileID: 1422180462}
@@ -52461,8 +52462,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baf67c8fd67015c4aabc4bae598203d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeUI
-  PlayerStats: {fileID: 0}
-  PlayerController: {fileID: 0}
+  PlayerStats: {fileID: 998505767}
+  PlayerController: {fileID: 998505765}
   _moveSpeedStatCostText: {fileID: 396584345}
   _rangeStatCostText: {fileID: 131217367}
   _batteryStatCostText: {fileID: 1642180590}
@@ -53646,8 +53647,8 @@ MonoBehaviour:
   _totalTrashCount: 0
   _destoryTrashCount: 0
   _clearPanel: {fileID: 1208345569}
-  _clearResultText: {fileID: 0}
-  _playerStats: {fileID: 0}
+  _clearResultText: {fileID: 1206963643}
+  _playerStats: {fileID: 998505767}
   _pauseScript: {fileID: 1746401441}
 --- !u!4 &1152690576
 Transform:
@@ -55449,7 +55450,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Exit
+  m_text: "\uB098\uAC00\uAE30"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c0154f9514f4d464ba28f79b868eee28, type: 2}
   m_sharedMaterial: {fileID: 2253400152907874517, guid: c0154f9514f4d464ba28f79b868eee28, type: 2}
@@ -56490,8 +56491,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -19.059998, y: 4.744751}
-  m_SizeDelta: {x: 1091.524, y: 363.119}
+  m_AnchoredPosition: {x: 34.018, y: 4.744751}
+  m_SizeDelta: {x: 823.047, y: 363.119}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1335378272
 MonoBehaviour:
@@ -57632,7 +57633,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Pause
+  m_text: "\uC77C\uC2DC\uC815\uC9C0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c0154f9514f4d464ba28f79b868eee28, type: 2}
   m_sharedMaterial: {fileID: 2253400152907874517, guid: c0154f9514f4d464ba28f79b868eee28, type: 2}
@@ -61692,7 +61693,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Setting
+  m_text: "\uC124\uC815"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c0154f9514f4d464ba28f79b868eee28, type: 2}
   m_sharedMaterial: {fileID: 2253400152907874517, guid: c0154f9514f4d464ba28f79b868eee28, type: 2}
@@ -62529,7 +62530,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: MouseSensitve
+  m_text: "\uB9C8\uC6B0\uC2A4 \uAC10\uB3C4"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c0154f9514f4d464ba28f79b868eee28, type: 2}
   m_sharedMaterial: {fileID: 2253400152907874517, guid: c0154f9514f4d464ba28f79b868eee28, type: 2}
@@ -63994,7 +63995,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c46b4c43a35f9444915cf56d3e6bee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MiniMapIcon
-  _target: {fileID: 0}
+  _target: {fileID: 998505770}
   _iconRect: {fileID: 1741641731}
 --- !u!1 &1727645693
 GameObject:
@@ -81675,7 +81676,7 @@ GameObject:
   - component: {fileID: 2077145072}
   - component: {fileID: 2077145071}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: CleanMode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81697,7 +81698,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -93.7, y: -0.8}
+  m_AnchoredPosition: {x: 50, y: -0.000031948}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2077145071
@@ -81720,7 +81721,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Mode : Sweeping'
+  m_text: "\uC4F8\uAE30"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c0154f9514f4d464ba28f79b868eee28, type: 2}
   m_sharedMaterial: {fileID: 2253400152907874517, guid: c0154f9514f4d464ba28f79b868eee28, type: 2}
@@ -82464,7 +82465,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Audio
+  m_text: "\uC624\uB514\uC624"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c0154f9514f4d464ba28f79b868eee28, type: 2}
   m_sharedMaterial: {fileID: 2253400152907874517, guid: c0154f9514f4d464ba28f79b868eee28, type: 2}
