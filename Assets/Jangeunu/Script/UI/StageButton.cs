@@ -1,12 +1,14 @@
+using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class StageButton : MonoBehaviour
 {
-    [Header("Stage Settings")]
-    [SerializeField] private UnityEditor.SceneAsset _sceneAsset; // 인스펙터에서 씬을 드래그 앤 드롭할 슬롯!
-    [SerializeField] private string _sceneName; // 이동할 실제 유니티 씬 이름 (예: "Stage1", "Stage2")
+#if UNITY_EDITOR
+    public SceneAsset stageSceneAsset;
+#endif
+    public string stageSceneName; // 런타임(빌드 후)에는 실제 씬 이름(string)을 사용
 
     private Button _button;
 
@@ -28,9 +30,9 @@ public class StageButton : MonoBehaviour
         }
 
         // 입력된 씬 이름으로 이동
-        if (!string.IsNullOrEmpty(_sceneName))
+        if (!string.IsNullOrEmpty(stageSceneName))
         {
-            SceneManager.LoadScene(_sceneName);
+            SceneManager.LoadScene(stageSceneName);
         }
         else
         {
@@ -38,11 +40,13 @@ public class StageButton : MonoBehaviour
         }
     }
 
+#if UNITY_EDITOR
     private void OnValidate()
     {
-        if (_sceneAsset != null)
+        if (stageSceneAsset != null)
         {
-            _sceneName = _sceneAsset.name;
+            stageSceneName = stageSceneAsset.name;
         }
     }
+#endif
 }
