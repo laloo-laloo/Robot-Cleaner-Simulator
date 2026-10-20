@@ -1280,8 +1280,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
-<<<<<<< HEAD
-=======
 --- !u!1 &296434621
 GameObject:
   m_ObjectHideFlags: 0
@@ -1583,7 +1581,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 347878196}
   m_CullTransparentMesh: 1
->>>>>>> b58cb2cb23e47c501e52234cfcad7c31b3217344
 --- !u!1 &350223466
 GameObject:
   m_ObjectHideFlags: 0
@@ -2515,14 +2512,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1552961323}
-<<<<<<< HEAD
-=======
   - {fileID: 1409711910}
   - {fileID: 222184016}
   - {fileID: 1884757166}
   - {fileID: 621386816}
   - {fileID: 1295427087}
->>>>>>> b58cb2cb23e47c501e52234cfcad7c31b3217344
   m_Father: {fileID: 1228081554}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6302,8 +6296,6 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
-<<<<<<< HEAD
-=======
 --- !u!1 &1856119377
 GameObject:
   m_ObjectHideFlags: 0
@@ -7067,7 +7059,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2106398085}
   m_CullTransparentMesh: 1
->>>>>>> b58cb2cb23e47c501e52234cfcad7c31b3217344
 --- !u!1 &2141648901
 GameObject:
   m_ObjectHideFlags: 0
