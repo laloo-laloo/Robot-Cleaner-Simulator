@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
         RotatePlayer();
         _moveSpeed = _playerStats.CurrentSpeed;
 
-        if (Keyboard.current.wKey.isPressed)
+        if (Keyboard.current.wKey.wasPressedThisFrame)
         {
             if (!_isBlockedByWall && IsCanMove)
             {

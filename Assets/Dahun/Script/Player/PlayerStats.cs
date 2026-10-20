@@ -48,10 +48,10 @@ public class PlayerStats : MonoBehaviour
     private CapsuleCollider _capsuleCollider;
     private int[] statLevel = new int[4];
     //속도, 범위, 배터리, 용량
-    public float[,] Cost = { { 10, 20, 30, 40 },
-                                { 10, 20, 30, 40 },
-                                { 10, 20, 30, 40 },
-                                { 10, 20, 30, 40 } };
+    public float[,] Cost = { { 250, 350, 500, 700 },
+                                { 200, 300, 450, 650 },
+                                { 150, 250, 350, 500 },
+                                { 150, 250, 350, 500 } };
 
     public enum StatType { MoveSpeed, Range, Battery, DustBin };
 

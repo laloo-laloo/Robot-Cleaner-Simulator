@@ -27,6 +27,11 @@ public class TabMenuManager : MonoBehaviour
         if (state)
         {
             OpenSubPage(0); // 기본 페이지(0번) 열기
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f; // 게임 재개
         }
     }
 
