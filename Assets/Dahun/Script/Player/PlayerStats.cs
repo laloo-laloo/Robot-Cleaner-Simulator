@@ -13,7 +13,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float _currentSpeed;
 
     [SerializeField] private UpgradeUI _upgradeUI;
-    [SerializeField] private ParticleSystem _moveSpeedFlashEffect, _rangeFlashEffect, _batteryFlashEffect, _dustBinFlashEffect;
+    [SerializeField] private ParticleSystem _moveSpeedFlashEffect, _rangeFlashEffect, _batteryFlashEffect, _dustBinFlashEffect, _basketFlashEffect;
 
     [SerializeField] private GameObject _moveSpeedMaxObject, _rangeMaxObject, _batteryMaxObject, _dustBinMaxObject;
 
@@ -290,6 +290,8 @@ public class PlayerStats : MonoBehaviour
         if (_gold >= 100f)
         {
             _gold -= 100;
+            _basketFlashEffect.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            _basketFlashEffect.Play();
             _basket.SetActive(true);
         }
     }
