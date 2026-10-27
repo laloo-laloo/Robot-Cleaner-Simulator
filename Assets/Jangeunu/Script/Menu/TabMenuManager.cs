@@ -63,11 +63,13 @@ public class TabMenuManager : MonoBehaviour
     {
         if (isMenuOpen)
         {
+            //키는거
             Cursor.lockState = CursorLockMode.None; // 커서 고정 해제
             Cursor.visible = true;                  // 커서 보이게 처리
         }
         else
         {
+            //끄는거
             Cursor.lockState = CursorLockMode.Locked; // 화면 중앙 고정 (프로젝트 설정에 따라 None/Confined 선택 가능)
             Cursor.visible = false;                   // 커서 숨김
         }

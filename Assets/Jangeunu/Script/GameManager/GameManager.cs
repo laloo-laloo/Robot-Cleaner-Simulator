@@ -54,20 +54,7 @@ public class GameManager : MonoBehaviour
 
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-            if (_pauseScript.gameObject.activeSelf)
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-                Time.timeScale = 1f;
-                _pauseScript.CloseUI();
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                _pauseScript.OpenUI();
-                Time.timeScale = 0f;
-            }
+            TogglePauseMenu();
         }
 
         
@@ -75,6 +62,30 @@ public class GameManager : MonoBehaviour
         if (_destoryTrashCount >= _totalTrashCount && _totalTrashCount > 0)
         {
             GameClear();
+        }
+    }
+
+    private void TogglePauseMenu()
+    {
+        bool state = !_pauseScript.gameObject.activeSelf;
+        _pauseScript.gameObject.SetActive(state);
+
+        // [추가] 메뉴 열림 여부에 따른 마우스 커서 제어
+        UpdateCursorState(state);
+    }
+    private void UpdateCursorState(bool openstate)
+    {
+        if (openstate)
+        {
+            //키는거
+            Cursor.lockState = CursorLockMode.None; // 커서 고정 해제
+            Cursor.visible = true;                  // 커서 보이게 처리
+        }
+        else
+        {
+            //끄는거
+            Cursor.lockState = CursorLockMode.Locked; // 화면 중앙 고정
+            Cursor.visible = false;                   // 커서 숨김
         }
     }
 
