@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class BaseStation : MonoBehaviour
 {
-    [SerializeField] private UpgradeUI _upgradeUI;
 
 
 
@@ -36,8 +35,7 @@ public class BaseStation : MonoBehaviour
 
                 // [추가] 플레이어 바구니에 담긴 큰 쓰레기 비우기
                 ClearBasketTrash(player._playerStats);
-                
-                _upgradeUI.OpenUpgradeUI();
+
             }
         }
     }

@@ -2110,6 +2110,10 @@ PrefabInstance:
       propertyPath: _upgradeUI
       value: 
       objectReference: {fileID: 1102764216}
+    - target: {fileID: 8600984821005980495, guid: 69e7a753937d2354aba31e60696a2563, type: 3}
+      propertyPath: _tabMenuManager
+      value: 
+      objectReference: {fileID: 1152690577}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3950,6 +3954,10 @@ PrefabInstance:
       propertyPath: _upgradeUI
       value: 
       objectReference: {fileID: 1102764216}
+    - target: {fileID: 8600984821005980495, guid: 69e7a753937d2354aba31e60696a2563, type: 3}
+      propertyPath: _tabMenuManager
+      value: 
+      objectReference: {fileID: 1152690577}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -51970,8 +51978,9 @@ MonoBehaviour:
   _dustMaxVolume: 0
   _batteryMaxVolume: 0
   _moveSpeed: 0
-  _gold: 0
   _currentSpeed: 0
+  _goldSlider: {fileID: 0}
+  _gold: 0
   _upgradeUI: {fileID: 1102764216}
   _moveSpeedFlashEffect: {fileID: 0}
   _rangeFlashEffect: {fileID: 0}
@@ -66633,6 +66642,10 @@ PrefabInstance:
       propertyPath: _upgradeUI
       value: 
       objectReference: {fileID: 1102764216}
+    - target: {fileID: 8600984821005980495, guid: 69e7a753937d2354aba31e60696a2563, type: 3}
+      propertyPath: _tabMenuManager
+      value: 
+      objectReference: {fileID: 1152690577}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -74938,6 +74951,10 @@ PrefabInstance:
       propertyPath: _upgradeUI
       value: 
       objectReference: {fileID: 1102764216}
+    - target: {fileID: 8600984821005980495, guid: 69e7a753937d2354aba31e60696a2563, type: 3}
+      propertyPath: _tabMenuManager
+      value: 
+      objectReference: {fileID: 1152690577}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -93300,6 +93317,10 @@ PrefabInstance:
       propertyPath: _upgradeUI
       value: 
       objectReference: {fileID: 1102764216}
+    - target: {fileID: 8600984821005980495, guid: 69e7a753937d2354aba31e60696a2563, type: 3}
+      propertyPath: _tabMenuManager
+      value: 
+      objectReference: {fileID: 1152690577}
     - target: {fileID: 8833841468065901886, guid: 69e7a753937d2354aba31e60696a2563, type: 3}
       propertyPath: m_Enabled
       value: 1

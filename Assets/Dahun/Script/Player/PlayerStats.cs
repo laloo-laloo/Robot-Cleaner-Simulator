@@ -3,14 +3,17 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
     [SerializeField] private float _dustVolume = 0, _batteryVolume = 100;
     [SerializeField] private float _dustMaxVolume = 100, _batteryMaxVolume = 100;
     [SerializeField] private float _moveSpeed = 2;
-    [SerializeField] private float _gold = 0;
     [SerializeField] private float _currentSpeed;
+
+    [SerializeField] private Slider _goldSlider;
+    [SerializeField] private float _gold;
 
     [SerializeField] private UpgradeUI _upgradeUI;
     [SerializeField] private ParticleSystem _moveSpeedFlashEffect, _rangeFlashEffect, _batteryFlashEffect, _dustBinFlashEffect, _basketFlashEffect;
@@ -67,6 +70,7 @@ public class PlayerStats : MonoBehaviour
     public void AddGold(float amount)
     {
         _gold += amount;
+        _gold = Mathf.Round(_gold * 100f) / 100f;
         updateGold();
     }
     public int GetStatLevel(StatType type) => statLevel[(int)type] + 1;
