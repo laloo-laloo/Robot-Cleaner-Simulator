@@ -83,19 +83,19 @@ public class TrashObject : MonoBehaviour
         {
             TrashType.Dust => 1,    // 먼지: 1점
             TrashType.Liquid => 1,  // 액체: 1점
-            TrashType.Big => 500,     // 큰 쓰레기: 1000점 (청소율 대폭 상승!)
+            TrashType.Big => 250,     // 큰 쓰레기: 250점 (청소율 대폭 상승!)
             _ => 1
         };
     }
 
     // 2. 실제로 플레이어에게 줄 골드 양 (밸런스에 맞게 지정)
-    public int GetTrashGold()
+    public float GetTrashGold()
     {
         return _trashType switch
         {
-            TrashType.Dust => 1,    // 먼지: 1 골드
-            TrashType.Liquid => 1,  // 액체: 1 골드
-            TrashType.Big => 50,     // 큰 쓰레기: 50 골드
+            TrashType.Dust => 0.4f,    // 먼지: 0.4 골드
+            TrashType.Liquid => 0.4f,  // 액체: 0.4 골드
+            TrashType.Big => 20.0f,     // 큰 쓰레기: 20.0 골드
             _ => 1
         };
     }

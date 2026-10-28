@@ -111,7 +111,7 @@ public class GameManager : MonoBehaviour
         };
     }
 
-    public void AddCleanProgress(ZoneArea.ZoneType zoneType, TrashObject.TrashType trashType, int weight = 1, int gold = 1)
+    public void AddCleanProgress(ZoneArea.ZoneType zoneType, TrashObject.TrashType trashType, int weight, float gold)
     {
         if (_totalTrashCount > _destoryTrashCount)
         {
