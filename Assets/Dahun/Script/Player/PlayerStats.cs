@@ -53,10 +53,10 @@ public class PlayerStats : MonoBehaviour
     // 속도, 범위, 배터리, 용량
     public float[,] Cost =
     {
-        { 200, 300, 400, 500 },
-        { 150, 250, 350, 450 },
-        { 100, 200, 300, 400 },
-        { 100, 200, 300, 400 }
+        { 50,  70,  90, 110 },
+        { 40,  60,  80, 100 },
+        { 30,  50,  70,  90 },
+        { 30,  50,  70,  90 }
     };
 
     public enum StatType { MoveSpeed, Range, Battery, DustBin };
