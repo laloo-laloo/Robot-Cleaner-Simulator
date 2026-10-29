@@ -886,8 +886,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11a2dc153245db548a95888135362dd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StageButton
-  stageSceneAsset: {fileID: 102900000, guid: c7642417811564445b207d814032cf61, type: 3}
-  stageSceneName: V1.7.0
+  stageSceneAsset: {fileID: 102900000, guid: b9e8f0198c465cb43aad382fc2f7979f, type: 3}
+  stageSceneName: v1.8.0
 --- !u!1 &181577292
 GameObject:
   m_ObjectHideFlags: 0
