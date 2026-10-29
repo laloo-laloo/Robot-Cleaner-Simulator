@@ -50,11 +50,14 @@ public class PlayerStats : MonoBehaviour
 
     private CapsuleCollider _capsuleCollider;
     private int[] statLevel = new int[4];
-    //속도, 범위, 배터리, 용량
-    public float[,] Cost = { { 250, 350, 500, 700 },
-                                { 200, 300, 450, 650 },
-                                { 150, 250, 350, 500 },
-                                { 150, 250, 350, 500 } };
+    // 속도, 범위, 배터리, 용량
+    public float[,] Cost =
+    {
+        { 200, 300, 400, 500 },
+        { 150, 250, 350, 450 },
+        { 100, 200, 300, 400 },
+        { 100, 200, 300, 400 }
+    };
 
     public enum StatType { MoveSpeed, Range, Battery, DustBin };
 
@@ -294,8 +297,12 @@ public class PlayerStats : MonoBehaviour
         if (_gold >= 100f)
         {
             _gold -= 100;
-            _basketFlashEffect.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-            _basketFlashEffect.Play();
+            if (_basketFlashEffect != null)
+            {
+                _basketFlashEffect.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                _basketFlashEffect.Play();
+            }
+            
             _basket.SetActive(true);
         }
     }
