@@ -16,14 +16,13 @@ public class BaseStation : MonoBehaviour
     {
         
     }
-
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
         print("충돌 감지");
-        if (other.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             print("플레이어 충돌 감지");
-            Player player = other.gameObject.GetComponentInParent<Player>();
+            Player player = collision.gameObject.GetComponentInParent<Player>();
 
             if (player != null)
             {

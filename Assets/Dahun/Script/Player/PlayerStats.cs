@@ -34,6 +34,8 @@ public class PlayerStats : MonoBehaviour
     public GameObject GuideArrow;
     public int BasketMaxCapacity => _basketMaxCapacity;
 
+    private bool _firstSkill, _secondSkill, _thirdSkill, _forthSkill;
+
     // 현재 바구니에 담긴 큰 쓰레기 개수 반환
     public int CurrentCarryingTrashCount
     {
@@ -50,12 +52,12 @@ public class PlayerStats : MonoBehaviour
 
     private CapsuleCollider _capsuleCollider;
     private int[] statLevel = new int[4];
-    // 속도, 범위, 배터리, 용량
+    // 범위, 베터리, 속도, 용량
     public float[,] Cost =
     {
-        { 50,  70,  90, 110 },
         { 40,  60,  80, 100 },
         { 30,  50,  70,  90 },
+        { 50,  70,  90, 110 },
         { 30,  50,  70,  90 }
     };
 
@@ -108,6 +110,7 @@ public class PlayerStats : MonoBehaviour
     void Update()
     {
         CunsumeBattery();
+        PressSkill();
         if (Keyboard.current.eKey.isPressed)
         {
             _gold += 100;
@@ -120,6 +123,27 @@ public class PlayerStats : MonoBehaviour
         dir.y = 0; // 수평 방향만 가리키게
         GuideArrow.transform.rotation = Quaternion.LookRotation(dir);
     }
+
+    private void PressSkill()
+    {
+        if (Keyboard.current.digit1Key.wasPressedThisFrame && _firstSkill)
+        {
+            StartCoroutine(UseSkill(StatType.Range));
+        }
+        if (Keyboard.current.digit1Key.wasPressedThisFrame && _secondSkill)
+        {
+            //베터리
+        }
+        if (Keyboard.current.digit1Key.wasPressedThisFrame && _thirdSkill)
+        {
+            //속도
+        }
+        if (Keyboard.current.digit1Key.wasPressedThisFrame && _forthSkill)
+        {
+            //용량
+        }
+    }
+    
 
     private Transform GetClosestBaseStation()
     {
@@ -229,7 +253,54 @@ public class PlayerStats : MonoBehaviour
         SoundManager.Instance.PlaySFX(SoundManager.SFX.RechargingBattery);
         StartCoroutine(Recharging());
     }
+    private IEnumerator UseSkill(StatType type)
+    {
+        bool isRangeCoolTime = false;
+        switch (type)
+        {
+            case StatType.Range:
+                //범위
+                if (!isRangeCoolTime)
+                {
+                    if (BatteryVolume >= BatteryMaxVolume * 0.1f)
+                    {
+                        _batteryVolume -= BatteryMaxVolume * 0.1f;
+                        float currentRadius = Range;
+                        _capsuleCollider.radius = 5f;
+                        yield return new WaitForSeconds(0.2f);
+                        _capsuleCollider.radius = currentRadius;
+                        isRangeCoolTime = true;
+                    }
+                }
+                else
+                {
+                    float rangeCoolTime = 5;
+                    if (isRangeCoolTime)
+                    {
+                        float currentCoolTime = rangeCoolTime;
+                        if(currentCoolTime <= 0)
+                        {
+                            isRangeCoolTime = false;
+                        }
+                        else
+                        {
+                            currentCoolTime -= Time.deltaTime;
+                        }
+                    }
+                }
+                break;
+            case StatType.Battery:
 
+                break;
+            case StatType.MoveSpeed:
+
+                break;
+            case StatType.DustBin:
+
+                break;
+        }
+        yield return null;
+    }
     private IEnumerator DecreaseDust()
     {
         while (_dustVolume > 0)
@@ -263,10 +334,22 @@ public class PlayerStats : MonoBehaviour
 
         switch (type)
         {
-            case StatType.MoveSpeed: _moveSpeedMaxObject.SetActive(isMax); break;
-            case StatType.Range: _rangeMaxObject.SetActive(isMax); break;
-            case StatType.Battery: _batteryMaxObject.SetActive(isMax); break;
-            case StatType.DustBin: _dustBinMaxObject.SetActive(isMax); break;
+            case StatType.Range: 
+                _rangeMaxObject.SetActive(isMax);
+                _firstSkill = true;
+                break;
+            case StatType.Battery: 
+                _batteryMaxObject.SetActive(isMax); 
+                _secondSkill = true;
+                break;
+            case StatType.MoveSpeed: 
+                _moveSpeedMaxObject.SetActive(isMax); 
+                _thirdSkill = true;
+                break;
+            case StatType.DustBin: 
+                _dustBinMaxObject.SetActive(isMax); 
+                _forthSkill = true;
+                break;
         }
     }
     private void UpdateAppearance(StatType type)

@@ -47,7 +47,7 @@ public class TrashObject : MonoBehaviour
     }
 
     // 1. 일반 쓰레기 (Dust, Liquid) - Trigger 상태일 때 작동
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (!other.CompareTag("Player")) return;
 
@@ -62,6 +62,7 @@ public class TrashObject : MonoBehaviour
             ProcessSuckUp(playerClean.Mode, player);
         }
     }
+    
 
     // 2. 큰 쓰레기 (Big) - 일반 Collider 상태일 때 물리 충돌로 작동
     private void OnCollisionEnter(Collision collision)
