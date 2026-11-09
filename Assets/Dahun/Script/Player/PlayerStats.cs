@@ -12,6 +12,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float _moveSpeed = 2;
     [SerializeField] private float _currentSpeed;
 
+    private float _cunsumeSpeed = 0.8f;
+
     [SerializeField] private Slider _goldSlider;
     [SerializeField] private float _gold;
 
@@ -34,7 +36,8 @@ public class PlayerStats : MonoBehaviour
     public GameObject GuideArrow;
     public int BasketMaxCapacity => _basketMaxCapacity;
 
-    private bool _firstSkill, _secondSkill, _thirdSkill, _forthSkill;
+    private bool _firstSkill = false, _secondSkill = false, _thirdSkill = false, _forthSkill = false;
+    private bool _enableDecrease = true;
 
     // 현재 바구니에 담긴 큰 쓰레기 개수 반환
     public int CurrentCarryingTrashCount
@@ -105,7 +108,6 @@ public class PlayerStats : MonoBehaviour
         _batteryMaxObject.SetActive(false);
         _dustBinMaxObject.SetActive(false);
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -130,17 +132,25 @@ public class PlayerStats : MonoBehaviour
         {
             StartCoroutine(UseSkill(StatType.Range));
         }
-        if (Keyboard.current.digit1Key.wasPressedThisFrame && _secondSkill)
+        if (Keyboard.current.digit2Key.wasPressedThisFrame && _secondSkill)
         {
-            //베터리
+            StartCoroutine(UseSkill(StatType.Battery));
         }
-        if (Keyboard.current.digit1Key.wasPressedThisFrame && _thirdSkill)
-        {
-            //속도
-        }
-        if (Keyboard.current.digit1Key.wasPressedThisFrame && _forthSkill)
+        if (Keyboard.current.digit3Key.wasPressedThisFrame && _forthSkill)
         {
             //용량
+        }
+        if (Keyboard.current.leftShiftKey.isPressed && _thirdSkill)
+        {
+            //속도
+            _currentSpeed = _moveSpeed * 2;
+            _cunsumeSpeed = 1.6f;
+        }
+        else
+        {
+            //속도
+            _currentSpeed = _moveSpeed;
+            _cunsumeSpeed = 0.8f;
         }
     }
     
@@ -173,6 +183,7 @@ public class PlayerStats : MonoBehaviour
         _moveSpeed = 2f;
         _currentSpeed = _moveSpeed;
         _capsuleCollider.radius = 0.7f;
+        _cunsumeSpeed = 0.8f;
     }
 
     public void AddDust()
@@ -264,7 +275,9 @@ public class PlayerStats : MonoBehaviour
                 {
                     if (BatteryVolume >= BatteryMaxVolume * 0.1f)
                     {
-                        _batteryVolume -= BatteryMaxVolume * 0.1f;
+                        if (_enableDecrease)
+                            _batteryVolume -= BatteryMaxVolume * 0.1f;
+                        
                         float currentRadius = Range;
                         _capsuleCollider.radius = 5f;
                         yield return new WaitForSeconds(0.2f);
@@ -290,7 +303,13 @@ public class PlayerStats : MonoBehaviour
                 }
                 break;
             case StatType.Battery:
-
+                if (BatteryVolume >= BatteryMaxVolume * 0.3f)
+                {
+                    _enableDecrease = false;
+                    yield return new WaitForSeconds(30f);
+                    _batteryVolume -= BatteryMaxVolume * 0.3f;
+                    _enableDecrease = true;
+                }
                 break;
             case StatType.MoveSpeed:
 
@@ -323,8 +342,8 @@ public class PlayerStats : MonoBehaviour
             _currentSpeed = 1f;
         else
             _currentSpeed = _moveSpeed;
-
-        _batteryVolume = Mathf.MoveTowards(_batteryVolume, 0f, 0.8f * Time.deltaTime);
+        if (_enableDecrease)
+            _batteryVolume = Mathf.MoveTowards(_batteryVolume, 0f, 0.8f * Time.deltaTime);
     }
 
     private void CheckMaxLevel(StatType type)
@@ -336,19 +355,19 @@ public class PlayerStats : MonoBehaviour
         {
             case StatType.Range: 
                 _rangeMaxObject.SetActive(isMax);
-                _firstSkill = true;
+                _firstSkill = isMax;
                 break;
             case StatType.Battery: 
                 _batteryMaxObject.SetActive(isMax); 
-                _secondSkill = true;
+                _secondSkill = isMax;
                 break;
             case StatType.MoveSpeed: 
                 _moveSpeedMaxObject.SetActive(isMax); 
-                _thirdSkill = true;
+                _thirdSkill = isMax;
                 break;
             case StatType.DustBin: 
                 _dustBinMaxObject.SetActive(isMax); 
-                _forthSkill = true;
+                _forthSkill = isMax;
                 break;
         }
     }
