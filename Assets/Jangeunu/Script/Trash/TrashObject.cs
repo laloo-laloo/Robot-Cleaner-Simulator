@@ -33,6 +33,11 @@ public class TrashObject : MonoBehaviour
 
     private void Start()
     {
+        if (this.gameObject.tag == "Trash")
+        {
+            this.enabled = false;
+        }
+
         // 쓰레기 위치를 감지해 현재 자기가 속한 ZoneArea의 ZoneType을 자동으로 가져옵니다.
         Collider[] hits = Physics.OverlapSphere(transform.position, 0.5f);
         foreach (Collider hit in hits)

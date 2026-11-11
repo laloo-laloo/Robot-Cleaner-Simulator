@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Wall"))
+        if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Desk"))
         {
             _isBlockedByWall = false;
         }
@@ -125,7 +125,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Wall"))
+        if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Desk"))
         {
             SoundManager.Instance.PlaySFX(SoundManager.SFX.BumpWall);
             PlayerMoveStop();

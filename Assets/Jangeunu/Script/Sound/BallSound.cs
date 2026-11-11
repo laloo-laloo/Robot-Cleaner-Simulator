@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BallSound : MonoBehaviour
 {
-    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioSource _audioSource;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -14,9 +14,9 @@ public class BallSound : MonoBehaviour
 
     private void PlayTingTingSound()
     {
-        if(audioSource != null && audioSource.clip != null)
+        if(_audioSource != null && _audioSource.clip != null)
         {
-            audioSource.PlayOneShot(audioSource.clip);
+            _audioSource.PlayOneShot(_audioSource.clip);
         }
     }
 }

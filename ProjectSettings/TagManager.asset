@@ -8,6 +8,7 @@ TagManager:
   - Trash
   - Ball
   - Floor
+  - Desk
   layers:
   - Default
   - TransparentFX
