@@ -16,22 +16,17 @@ public class TabMenuManager : MonoBehaviour
         }
     }
 
-    private void ToggleNotebook()
+    public void ToggleNotebook()
     {
         bool state = !_notebookPanel.activeSelf;
         _notebookPanel.SetActive(state);
-
         // [추가] 메뉴 열림 여부에 따른 마우스 커서 제어
         UpdateCursorState(state);
+        GameManager.Instance.CanUpgrade = false;
 
         if (state)
         {
             OpenSubPage(0); // 기본 페이지(0번) 열기
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            Time.timeScale = 1f; // 게임 재개
         }
     }
 

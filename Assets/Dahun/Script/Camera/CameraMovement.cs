@@ -31,13 +31,15 @@ public class CameraMovement : MonoBehaviour
 
     void LateUpdate()
     {
-        if (Cursor.lockState != CursorLockMode.Locked) return;
-
-        Vector2 mouseDelta = Mouse.current.delta.ReadValue();
-        _freeYaw = (_freeYaw + mouseDelta.x * _freeLookSensitivity) % 360f;
+        if (Cursor.lockState == CursorLockMode.Locked)
+        {
+            Vector2 mouseDelta = Mouse.current.delta.ReadValue();
+            _freeYaw = (_freeYaw + mouseDelta.x * _freeLookSensitivity) % 360f;
+        }
 
         Quaternion yawRotation = Quaternion.Euler(0f, _freeYaw, 0f);
         Vector3 desiredPosition = Player.position + yawRotation * _offset;
+
         transform.position = GetCollisionAdjustedPosition(desiredPosition);
         transform.rotation = yawRotation;
     }

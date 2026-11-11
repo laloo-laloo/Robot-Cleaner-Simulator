@@ -80,7 +80,7 @@ public class PlayerStats : MonoBehaviour
     {
         _gold += amount;
         _gold = Mathf.Round(_gold * 100f) / 100f;
-        updateGold();
+        UpdateGold();
     }
     public int GetStatLevel(StatType type) => statLevel[(int)type] + 1;
     public float GetUpgradeCost(StatType type)
@@ -90,7 +90,7 @@ public class PlayerStats : MonoBehaviour
         return Cost[(int)type, level];
     }
 
-    private void updateGold()
+    private void UpdateGold()
     {
         __goldText.text = Gold + "$";
     }
@@ -198,6 +198,9 @@ public class PlayerStats : MonoBehaviour
 
     public void Upgrade(StatType type, float amount)
     {
+        if(!GameManager.Instance.CanUpgrade)
+            return;
+        
         SoundManager.Instance.PlaySFX(SoundManager.SFX.Upgrade);
         int index = (int)type;
         int level = statLevel[index];
@@ -405,6 +408,9 @@ public class PlayerStats : MonoBehaviour
 
     public void BuyingBasket()
     {
+        if (!GameManager.Instance.CanUpgrade)
+            return;
+
         SoundManager.Instance.PlaySFX(SoundManager.SFX.Upgrade);
         if (_gold >= 100f)
         {

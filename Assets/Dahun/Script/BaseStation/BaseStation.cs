@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BaseStation : MonoBehaviour
 {
-
+    [SerializeField] private TabMenuManager _tabMenuManager;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -34,7 +34,9 @@ public class BaseStation : MonoBehaviour
 
                 // [추가] 플레이어 바구니에 담긴 큰 쓰레기 비우기
                 ClearBasketTrash(player._playerStats);
-
+                _tabMenuManager.ToggleNotebook();
+                _tabMenuManager.OpenSubPage(3);
+                GameManager.Instance.CanUpgrade = true;
             }
         }
     }

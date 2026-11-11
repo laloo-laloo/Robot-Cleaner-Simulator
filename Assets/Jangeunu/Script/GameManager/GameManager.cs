@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    public bool CanUpgrade = false;
 
     [Header("Trash Info")]
     [SerializeField] private int _totalTrashCount;
@@ -72,6 +73,14 @@ public class GameManager : MonoBehaviour
 
         // [추가] 메뉴 열림 여부에 따른 마우스 커서 제어
         UpdateCursorState(state);
+        if (state)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
     }
     private void UpdateCursorState(bool openstate)
     {
