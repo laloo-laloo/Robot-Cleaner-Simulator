@@ -38,6 +38,7 @@ public class PlayerStats : MonoBehaviour
 
     private bool _firstSkill = false, _secondSkill = false, _thirdSkill = false, _forthSkill = false;
     private bool _enableDecrease = true;
+    private bool _isActivateForthSkill = false;
 
     // 현재 바구니에 담긴 큰 쓰레기 개수 반환
     public int CurrentCarryingTrashCount
@@ -130,27 +131,31 @@ public class PlayerStats : MonoBehaviour
     {
         if (Keyboard.current.digit1Key.wasPressedThisFrame && _firstSkill)
         {
+            //범위
             StartCoroutine(UseSkill(StatType.Range));
         }
         if (Keyboard.current.digit2Key.wasPressedThisFrame && _secondSkill)
         {
+            //배터리
             StartCoroutine(UseSkill(StatType.Battery));
         }
         if (Keyboard.current.digit3Key.wasPressedThisFrame && _forthSkill)
         {
             //용량
+            StartCoroutine(UseSkill(StatType.DustBin));
         }
-        if (Keyboard.current.leftShiftKey.isPressed && _thirdSkill)
+        if(_batteryVolume > 0 && !_isActivateForthSkill)
         {
-            //속도
-            _currentSpeed = _moveSpeed * 2;
-            _cunsumeSpeed = 1.6f;
-        }
-        else
-        {
-            //속도
-            _currentSpeed = _moveSpeed;
-            _cunsumeSpeed = 0.8f;
+            if (Keyboard.current.leftShiftKey.isPressed && _thirdSkill)
+            {
+                _currentSpeed = _moveSpeed * 2;
+                _cunsumeSpeed = 1.6f;
+            }
+            else
+            {
+                _currentSpeed = _moveSpeed;
+                _cunsumeSpeed = 0.8f;
+            }
         }
     }
     
@@ -311,11 +316,16 @@ public class PlayerStats : MonoBehaviour
                     _enableDecrease = true;
                 }
                 break;
-            case StatType.MoveSpeed:
-
-                break;
             case StatType.DustBin:
+                _cunsumeSpeed = 5f;
+                _isActivateForthSkill = true;
+                while (_dustVolume > 0 && _batteryVolume > 0)
+                {
+                    _dustVolume = Mathf.MoveTowards(_dustVolume, 0, 5 * Time.deltaTime);
 
+                    yield return null;
+                }
+                _isActivateForthSkill = false;
                 break;
         }
         yield return null;
@@ -343,7 +353,7 @@ public class PlayerStats : MonoBehaviour
         else
             _currentSpeed = _moveSpeed;
         if (_enableDecrease)
-            _batteryVolume = Mathf.MoveTowards(_batteryVolume, 0f, 0.8f * Time.deltaTime);
+            _batteryVolume = Mathf.MoveTowards(_batteryVolume, 0f, _cunsumeSpeed * Time.deltaTime);
     }
 
     private void CheckMaxLevel(StatType type)
